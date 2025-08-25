@@ -1,0 +1,111 @@
+/* Кастомная стрелка вместо SVG */
+.custom-select-arrow {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+.custom-select-arrow::after {
+  content: "▾";
+  color: white;
+  font-size: 36px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+/* Принудительная стилизация выпадающих опций — где возможно */
+.custom-select-native option {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  font-size: 16px;
+  padding: 12px 20px;
+  font-weight: normal;
+}
+
+.custom-select-native option:hover,
+.custom-select-native option:focus {
+  background-color: #f0f0f0 !important;
+  color: #000 !important;
+}
+
+.custom-select-native option:checked {
+  background-color: #e0e0e0 !important;
+  color: #000 !important;
+}
+
+/* Для Internet Explorer/Edge (устаревшие) */
+.custom-select-native::-ms-expand {
+  display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+.custom-checkbox-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.custom-checkbox-input + label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;        /* ✅ Было: flex-start → стало: center */
+  cursor: pointer;
+  padding-left: 48px;          /* место под чекбокс */
+  min-height: 35px;            /* высота строки под чекбокс */
+  line-height: 1;              /* убираем лишние отступы у текста */
+  margin: 0;
+}
+
+/* Кастомный чекбокс (рамка) */
+.custom-checkbox-input + label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 35px;
+  height: 35px;
+  border: 2px solid #ffffff;
+  border-radius: 4px;
+  background-color: transparent;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+/* Галочка — SVG */
+.custom-checkbox-input + label::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 35px;
+  height: 35px;
+  background: url('../assets/checkMark.svg') no-repeat center center;
+  background-size: 18px 18px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+/* Состояние checked */
+.custom-checkbox-input:checked + label::before {
+  background-color: white;
+}
+
+.custom-checkbox-input:checked + label::after {
+  opacity: 1;
+}

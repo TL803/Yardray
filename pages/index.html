@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- 2. Загружаем Tailwind CSS через CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../styles/style.css">
+
+    <!-- 3. Настраиваем Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Muller', 'Commissioner', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                    },
+                    backgroundColor: {
+                        'custom': '#25262A',
+                    },
+                    colors: {
+                        primary: '#25262A',
+                        secondary: '#19BC8D',
+                        tertiary: '#D2D2D2',
+                        dark: '#13141770',
+                        white: '#ffffff'
+                    },
+                    screens: {
+                        md: '1680px'
+                    },
+                }
+            }
+        };
+    </script>
+
+</head>
+
+<body>
+    <div class="flex flex-col gap-[50px] items-center">
+        <button class="bg-blue-400 w-max p-[20px] rounded-xl text-white" data-open-modal="order-car">Открыть модалку</button>
+        <button class="bg-blue-400 w-max p-[20px] rounded-xl text-white" data-open-modal="order-selected-car">Открыть тачку</button>
+        <button class="bg-blue-400 w-max p-[20px] rounded-xl text-white" data-open-modal="leasing">Открыть модалку лизинга</button>
+        <button class="bg-blue-400 w-max p-[20px] rounded-xl text-white" data-open-modal="trade-in">Открыть модалку Trade-in</button>
+        <button class="bg-blue-400 w-max p-[20px] rounded-xl text-white" data-open-modal="questions">Открыть модалку Questions</button>
+    </div>
+
+
+    <script src="../script/main.js" type="module"></script>
+</body>
+
+</html>
