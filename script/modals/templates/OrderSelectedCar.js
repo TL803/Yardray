@@ -1,5 +1,3 @@
-// /script/modals/templates/OrderSelectedCar.js
-
 export class OrderSelectedCar {
   static getTemplate() {
     /* html */
@@ -138,7 +136,6 @@ export class OrderSelectedCar {
           alt="Background vector"
         />
         <div class="w-full px-8 mt-6 relative">
-
           <button 
             type="button"
             id="submit-selected-car"
@@ -174,7 +171,7 @@ export class OrderSelectedCar {
       <div class="text-center h-[700px] flex flex-col justify-between mx-auto p-8 relative">
         <div>
           <h2 class="text-[48px] font-bold text-white mb-4">Заявка отправлена!</h2>
-          <img class="w-[286px] absolute bottom-[80px] left-[150px] pointer-events-none" src="../assets/popup/Dargo 1.png"/>
+          <img class="w-[286px] absolute z-1 bottom-[80px] left-[150px] pointer-events-none" src="../assets/popup/Dargo 1.png"/>
           <p class="text-white text-[24px] mb-8 leading-relaxed">
             Мы уже подбираем для вас лучшее предложение.<br>
             Скоро свяжемся с вами!
@@ -195,21 +192,19 @@ export class OrderSelectedCar {
     `;
   }
 
-  static initForm(modalElement) {
+  static initForm(modalElement, modalWindow) {
     this.initCustomSelects(modalElement);
 
     const form = modalElement.querySelector('#order-selected-car-form');
     const submitBtn = modalElement.querySelector('#submit-selected-car');
 
-    submitBtn.addEventListener('click', (e) => {
+    const handleSubmit = (e) => {
       e.preventDefault();
-      this.validateAndSubmit(form, modalElement);
-    });
+      this.validateAndSubmit(form, modalElement, modalWindow);
+    };
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      this.validateAndSubmit(form, modalElement);
-    });
+    submitBtn.addEventListener('click', handleSubmit);
+    form.addEventListener('submit', handleSubmit);
   }
 
   static initCustomSelects(modalElement) {
@@ -238,7 +233,7 @@ export class OrderSelectedCar {
     });
   }
 
-  static validateAndSubmit(form, modalElement) {
+  static validateAndSubmit(form, modalElement, modalWindow) {
     let isValid = true;
 
     form.querySelectorAll('.error-message').forEach(el => {
@@ -261,7 +256,7 @@ export class OrderSelectedCar {
     });
 
     if (isValid) {
-      this.submitForm(form, modalElement);
+      this.submitForm(form, modalElement, modalWindow);
     }
   }
 
@@ -330,15 +325,15 @@ export class OrderSelectedCar {
     errorDiv.textContent = message;
   }
 
-  static submitForm(form, modalElement) {
+  static submitForm(form, modalElement, modalWindow) {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData);
     console.log('Отправлено (выбранный автомобиль):', data);
 
-    // Показ успешного экрана
+    modalWindow.setBackground('../assets/popup/nature.png');
+
     modalElement.innerHTML = this.getSuccessTemplate();
 
-    // Фокус на кнопку закрытия
     setTimeout(() => {
       const closeBtn = modalElement.querySelector('[data-close-modal]');
       if (closeBtn) closeBtn.focus();

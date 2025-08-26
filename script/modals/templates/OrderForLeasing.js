@@ -1,5 +1,3 @@
-// /script/modals/templates/OrderForLeasingModal.js
-
 export class OrderForLeasingModal {
   static getTemplate() {
     /* html */
@@ -127,13 +125,11 @@ export class OrderForLeasingModal {
     const form = modalElement.querySelector('#leasing-form');
     const submitBtn = modalElement.querySelector('#submit-leasing');
 
-    // Обработчик кнопки
     submitBtn.addEventListener('click', (e) => {
       e.preventDefault();
       this.validateAndSubmit(form, modalElement);
     });
 
-    // Обработка сабмита формы (на Enter)
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       this.validateAndSubmit(form, modalElement);
@@ -143,13 +139,11 @@ export class OrderForLeasingModal {
   static validateAndSubmit(form, modalElement) {
     let isValid = true;
 
-    // Сброс ошибок
     form.querySelectorAll('.error-message').forEach(el => {
       el.classList.add('hidden');
       el.textContent = '';
     });
 
-    // Поля для валидации
     const fieldsToValidate = [
       { element: form.full_name, validator: this.validateName.bind(this) },
       { element: form.phone, validator: this.validatePhone.bind(this) },
@@ -229,10 +223,8 @@ export class OrderForLeasingModal {
     const data = Object.fromEntries(formData);
     console.log('Отправлено (лизинг):', data);
 
-    // Показ успешного экрана
     modalElement.innerHTML = this.getSuccessTemplate();
 
-    // Фокус на кнопку закрытия
     setTimeout(() => {
       const closeBtn = modalElement.querySelector('[data-close-modal]');
       if (closeBtn) closeBtn.focus();

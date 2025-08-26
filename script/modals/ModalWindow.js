@@ -18,10 +18,11 @@ export class ModalWindow {
     }
 
     const bgStyle = background 
-      ? `background-image: url('${background}'); background-position: top;`
+      ? `background-image: url('${background}'); background-position: top; background-size: cover; background-repeat: no-repeat;`
       : 'background: linear-gradient(to bottom, #191919 0%, #24353E 50%, #000000 100%);';
 
     this.element = DomUtils.createElement('div', `
+      modal-window
       relative 
       w-full max-w-[1440px]
       min-h-[700px] 
@@ -103,5 +104,17 @@ export class ModalWindow {
 
   setOnClose(callback) {
     this.onClose = callback;
+  }
+
+  // 🆕 Новый метод: изменение фона
+  setBackground(backgroundImageUrl) {
+    if (backgroundImageUrl) {
+      this.element.style.backgroundImage = `url('${backgroundImageUrl}')`;
+      this.element.style.backgroundPosition = 'top';
+      this.element.style.backgroundSize = 'cover';
+      this.element.style.backgroundRepeat = 'no-repeat';
+    } else {
+      this.element.style.backgroundImage = 'linear-gradient(to bottom, #191919 0%, #24353E 50%, #000000 100%)';
+    }
   }
 }

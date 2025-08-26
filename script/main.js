@@ -1,4 +1,3 @@
-// /script/main.js
 import { ModalManager } from './modals/ModalManager.js';
 import './modals/request-car.js';
 

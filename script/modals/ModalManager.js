@@ -71,7 +71,7 @@ export class ModalManager {
     const modalConfig = PopupFactory.getModalConfig(templateName);
     
     if (modalConfig && typeof modalConfig.initForm === 'function') {
-      modalConfig.initForm(window.content);
+      modalConfig.initForm(window.content, window);
     }
   }
 
