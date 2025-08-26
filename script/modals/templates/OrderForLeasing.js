@@ -57,6 +57,7 @@ export class OrderForLeasingModal {
                   type="checkbox" 
                   name="privacy_policy" 
                   required 
+                  checked
                   class="mt-1.5 w-5 h-5 custom-checkbox-input border border-[#F8F8F852] rounded bg-transparent focus:ring-red-400"
                   id="privacy-policy"
                 >
