@@ -162,17 +162,21 @@ export class OrderForLeasingModal {
     }
   }
 
-  static validateName(input) {
-    if (!input.value.trim()) {
-      this.showError(input, 'Введите ваше ФИО');
-      return false;
-    }
-    if (input.value.trim().split(' ').length < 2) {
-      this.showError(input, 'Введите как минимум имя и фамилию');
-      return false;
-    }
-    return true;
+static validateName(input) {
+  const value = input.value.trim();
+
+  if (!value) {
+    this.showError(input, 'Введите ваше ФИО');
+    return false;
   }
+  const words = value.split(' ').filter(word => word.length > 0);
+  if (words.length < 1) {
+    this.showError(input, 'Введите хотя бы одно имя');
+    return false;
+  }
+
+  return true;
+}
 
   static validatePhone(input) {
     const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;

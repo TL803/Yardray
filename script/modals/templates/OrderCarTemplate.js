@@ -1,7 +1,7 @@
 export class OrderCarTemplate {
   static getTemplate(params = {}) {
     const title = params.title || 'Заявка на покупку авто';
-    const description = params.description || 'Оставьте ваш номер и мы перезвоним в ближайшее время!';
+    const description = params.description || 'Оставьте Ваши контакты и мы перезвоним в ближайшее время!';
     const buttonText = params.buttonText || 'Получить предложение!';
 
     /* html */
@@ -18,41 +18,7 @@ export class OrderCarTemplate {
           </div>
 
           <form id="order-car-form" data-modal-form="order-car" class="space-y-8 mt-2 w-full">
-            <div>
-              <input 
-                type="text" 
-                name="full_name" 
-                required 
-                class="w-full h-[60px] px-6 
-                       bg-[#F8F8F852] border border-[#F8F8F852] rounded-xl
-                       text-white placeholder-white placeholder-opacity-70 
-                       text-[16px] font-normal 
-                       focus:outline-none 
-                       focus:ring-2 focus:ring-red-400 focus:ring-opacity-60 
-                       focus:border-red-400"
-                placeholder="ФИО"
-                minlength="2"
-                maxlength="100"
-              >
-              <div class="error-message text-red-300 text-sm mt-1 hidden"></div>
-            </div>
 
-            <div>
-              <input 
-                type="tel" 
-                name="phone" 
-                required 
-                class="w-full h-[60px] px-6 
-                       bg-[#F8F8F852] border border-[#F8F8F852] rounded-xl
-                       text-white placeholder-white placeholder-opacity-70 
-                       text-[16px] font-normal 
-                       focus:outline-none 
-                       focus:ring-2 focus:ring-red-400 focus:ring-opacity-60 
-                       focus:border-red-400"
-                placeholder="Ваш телефон"
-              >
-              <div class="error-message text-red-300 text-sm mt-1 hidden"></div>
-            </div>
 
             <div class="relative">
               <div class="relative w-full">
@@ -108,6 +74,41 @@ export class OrderCarTemplate {
               </div>
             </div>
 
+                        <div>
+              <input 
+                type="text" 
+                name="full_name" 
+                required 
+                class="w-full h-[60px] px-6 
+                       bg-[#F8F8F852] border border-[#F8F8F852] rounded-xl
+                       text-white placeholder-white placeholder-opacity-70 
+                       text-[16px] font-normal 
+                       focus:outline-none 
+                       focus:ring-2 focus:ring-red-400 focus:ring-opacity-60 
+                       focus:border-red-400"
+                placeholder="ФИО"
+                minlength="2"
+                maxlength="100"
+              >
+              <div class="error-message text-red-300 text-sm mt-1 hidden"></div>
+            </div>
+
+            <div>
+              <input 
+                type="tel" 
+                name="phone" 
+                required 
+                class="w-full h-[60px] px-6 
+                       bg-[#F8F8F852] border border-[#F8F8F852] rounded-xl
+                       text-white placeholder-white placeholder-opacity-70 
+                       text-[16px] font-normal 
+                       focus:outline-none 
+                       focus:ring-2 focus:ring-red-400 focus:ring-opacity-60 
+                       focus:border-red-400"
+                placeholder="Ваш телефон"
+              >
+              <div class="error-message text-red-300 text-sm mt-1 hidden"></div>
+            </div>
             <div class="flex items-start mt-1">
               <input 
                 type="checkbox" 
@@ -174,7 +175,7 @@ export class OrderCarTemplate {
 
   static initForm(modalElement) {
     this.initCustomSelects(modalElement);
-    
+
     const form = modalElement.querySelector('#order-car-form');
     const submitBtn = modalElement.querySelector('#submit-order-car');
 
@@ -243,14 +244,18 @@ export class OrderCarTemplate {
   }
 
   static validateName(input) {
-    if (!input.value.trim()) {
+    const value = input.value.trim();
+
+    if (!value) {
       this.showError(input, 'Введите ваше ФИО');
       return false;
     }
-    if (input.value.trim().split(' ').length < 2) {
-      this.showError(input, 'Введите как минимум имя и фамилию');
+    const words = value.split(' ').filter(word => word.length > 0);
+    if (words.length < 1) {
+      this.showError(input, 'Введите хотя бы одно имя');
       return false;
     }
+
     return true;
   }
 
@@ -285,7 +290,7 @@ export class OrderCarTemplate {
         errorDiv.className = 'error-message text-red-300 text-sm mt-1';
         label.parentNode.insertBefore(errorDiv, label.nextSibling);
       }
-      
+
       errorDiv.classList.remove('hidden');
       errorDiv.textContent = 'Необходимо согласие с политикой';
       return false;
@@ -296,13 +301,13 @@ export class OrderCarTemplate {
   static showError(inputElement, message) {
     const parent = inputElement.closest('div');
     let errorDiv = parent.querySelector('.error-message');
-    
+
     if (!errorDiv) {
       errorDiv = document.createElement('div');
       errorDiv.className = 'error-message text-red-300 text-sm mt-1';
       parent.appendChild(errorDiv);
     }
-    
+
     errorDiv.classList.remove('hidden');
     errorDiv.textContent = message;
   }
