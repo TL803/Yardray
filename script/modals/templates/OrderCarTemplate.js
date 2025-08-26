@@ -173,7 +173,6 @@ export class OrderCarTemplate {
   }
 
   static initForm(modalElement) {
-    // Инициализация кастомных селектов
     this.initCustomSelects(modalElement);
     
     const form = modalElement.querySelector('#order-car-form');
@@ -184,7 +183,6 @@ export class OrderCarTemplate {
       this.validateAndSubmit(form, modalElement);
     });
 
-    // Также обрабатываем сабмит формы
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       this.validateAndSubmit(form, modalElement);
@@ -200,7 +198,6 @@ export class OrderCarTemplate {
     const modelDisplay = modalElement.querySelector('#car-model-display');
     const modelLabel = modalElement.querySelector('#car-model-label');
 
-    // Обработчики для бренда
     brandSelect.addEventListener('change', () => {
       brandLabel.textContent = brandSelect.options[brandSelect.selectedIndex].text;
     });
@@ -209,7 +206,6 @@ export class OrderCarTemplate {
       brandSelect.focus();
     });
 
-    // Обработчики для модели
     modelSelect.addEventListener('change', () => {
       modelLabel.textContent = modelSelect.options[modelSelect.selectedIndex].text;
     });
@@ -222,13 +218,11 @@ export class OrderCarTemplate {
   static validateAndSubmit(form, modalElement) {
     let isValid = true;
 
-    // Сбрасываем ошибки
     form.querySelectorAll('.error-message').forEach(el => {
       el.classList.add('hidden');
       el.textContent = '';
     });
 
-    // Валидация полей — используем .bind(this), чтобы сохранить контекст
     const fieldsToValidate = [
       { element: form.full_name, validator: this.validateName.bind(this) },
       { element: form.phone, validator: this.validatePhone.bind(this) },

@@ -24,7 +24,7 @@ export class ModalWindow {
     this.element = DomUtils.createElement('div', `
       relative 
       w-full max-w-[1440px]
-      h-[800px] 
+      h-[900px] 
       overflow-y-auto
       rounded-xl 
       shadow-2xl

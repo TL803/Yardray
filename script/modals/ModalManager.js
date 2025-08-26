@@ -64,7 +64,6 @@ export class ModalManager {
     this.cleanupEscape = DomUtils.onEscape(() => this.close());
     backdrop.show();
 
-    // Инициализируем форму через метод шаблона
     this.initTemplateLogic(window, name);
   }
 
