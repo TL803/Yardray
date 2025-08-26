@@ -119,7 +119,7 @@ export class Questions {
                  transition duration-200 
                  transform hover:scale-[1.01] 
                  focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
-          Закрыть
+          Отлично!
         </button>
       </div>
     `;

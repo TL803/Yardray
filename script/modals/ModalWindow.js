@@ -24,11 +24,11 @@ export class ModalWindow {
     this.element = DomUtils.createElement('div', `
       relative 
       w-full max-w-[1440px]
-      h-[900px] 
+      min-h-[700px] 
       overflow-y-auto
       rounded-xl 
       shadow-2xl
-      p-6
+      p-10
       bg-cover bg-center bg-no-repeat
       before:content-[''] 
       before:absolute 

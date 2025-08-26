@@ -118,6 +118,7 @@ export class OrderSelectedCar {
                   type="checkbox" 
                   name="privacy_policy" 
                   required 
+                  checked
                   class="mt-1.5 w-5 h-5 custom-checkbox-input border border-[#F8F8F852] rounded bg-transparent focus:ring-red-400"
                   id="privacy-policy"
                 >
@@ -131,12 +132,12 @@ export class OrderSelectedCar {
         </div>
 
         <!-- Кнопка и изображения -->
+        <img 
+          class="absolute -top-12 pointer-events-none w-[500px] right-[80px] z-0" 
+          src="../assets/popup/Vector 4.png" 
+          alt="Background vector"
+        />
         <div class="w-full px-8 mt-6 relative">
-          <img 
-            class="absolute bottom-0 w-[700px] right-[40px] z-0" 
-            src="../assets/popup/Vector 4.png" 
-            alt="Background vector"
-          />
 
           <button 
             type="button"
@@ -154,7 +155,7 @@ export class OrderSelectedCar {
           </button>
 
           <img 
-            class="absolute bottom-[10px] w-[700px] right-[40px] z-20" 
+            class="absolute bottom-[10px] pointer-events-none w-[700px] right-[40px] z-20" 
             src="../assets/popup/Dargo 1.png" 
             alt="Car"
           />
@@ -170,9 +171,10 @@ export class OrderSelectedCar {
   static getSuccessTemplate() {
     /* html */
     return `
-      <div class="text-center h-[700px] flex flex-col justify-between mx-auto p-8">
+      <div class="text-center h-[700px] flex flex-col justify-between mx-auto p-8 relative">
         <div>
           <h2 class="text-[48px] font-bold text-white mb-4">Заявка отправлена!</h2>
+          <img class="w-[286px] absolute bottom-[80px] left-[150px] pointer-events-none" src="../assets/popup/Dargo 1.png"/>
           <p class="text-white text-[24px] mb-8 leading-relaxed">
             Мы уже подбираем для вас лучшее предложение.<br>
             Скоро свяжемся с вами!
@@ -187,26 +189,23 @@ export class OrderSelectedCar {
                  transition duration-200 
                  transform hover:scale-[1.01] 
                  focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
-          Закрыть
+          Отлично!
         </button>
       </div>
     `;
   }
 
   static initForm(modalElement) {
-    // Инициализация кастомных селектов
     this.initCustomSelects(modalElement);
 
     const form = modalElement.querySelector('#order-selected-car-form');
     const submitBtn = modalElement.querySelector('#submit-selected-car');
 
-    // Обработчик кнопки
     submitBtn.addEventListener('click', (e) => {
       e.preventDefault();
       this.validateAndSubmit(form, modalElement);
     });
 
-    // Обработка сабмита формы (Enter)
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       this.validateAndSubmit(form, modalElement);
@@ -222,7 +221,6 @@ export class OrderSelectedCar {
     const modelDisplay = modalElement.querySelector('#car-model-display');
     const modelLabel = modalElement.querySelector('#car-model-label');
 
-    // Обновление текста при изменении
     brandSelect.addEventListener('change', () => {
       brandLabel.textContent = brandSelect.options[brandSelect.selectedIndex].text;
     });
@@ -243,13 +241,11 @@ export class OrderSelectedCar {
   static validateAndSubmit(form, modalElement) {
     let isValid = true;
 
-    // Сброс ошибок
     form.querySelectorAll('.error-message').forEach(el => {
       el.classList.add('hidden');
       el.textContent = '';
     });
 
-    // Поля для валидации
     const fieldsToValidate = [
       { element: form.car_brand, validator: this.validateSelect.bind(this) },
       { element: form.car_model, validator: this.validateSelect.bind(this) },
