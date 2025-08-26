@@ -1,4 +1,3 @@
-// /script/modals/utils/ModalManager.js
 import { ModalBackdrop } from './ModalBackdrop.js';
 import { ModalWindow } from './ModalWindow.js';
 import { PopupFactory } from './PopupFactory.js';
@@ -20,13 +19,15 @@ export class ModalManager {
         const params = this.parseModalParams(trigger);
         this.open(modalName, params);
       }
+
+      if (e.target.closest('[data-close-modal]')) {
+        this.close();
+      }
     });
   }
 
   parseModalParams(trigger) {
     const params = {};
-    
-    // Получаем все data-атрибуты
     const attributes = trigger.attributes;
     for (let i = 0; i < attributes.length; i++) {
       const attr = attributes[i];
@@ -34,34 +35,45 @@ export class ModalManager {
         const paramName = attr.name.replace('data-param-', '');
         params[paramName] = attr.value;
       }
+      
+      if (attr.name === 'data-background') {
+        params.background = attr.value;
+      }
     }
-    
     return params;
   }
 
   open(name, params = {}) {
     this.close();
-  
-    // Получаем HTML содержимое из фабрики с параметрами
+
     const modalContent = PopupFactory.createModal(name, params);
-    
-    // Создаем модальное окно с полученным содержимым
-    const window = new ModalWindow(modalContent);
+    const backgroundImage = params.background || modalContent.background;
+
+    const window = new ModalWindow(modalContent, backgroundImage);
     const backdrop = new ModalBackdrop();
-  
+
     backdrop.element.appendChild(window.element);
     this.currentModal = { backdrop, window };
-  
+
     window.closeBtn.addEventListener('click', () => this.close());
-  
+
     backdrop.element.addEventListener('click', (e) => {
       DomUtils.closeOnBackdrop(e, backdrop.element, () => this.close());
     });
-  
+
     this.cleanupEscape = DomUtils.onEscape(() => this.close());
-  
     backdrop.show();
-    DomUtils.focusFirstInput(window.content);
+
+    // Инициализируем форму через метод шаблона
+    this.initTemplateLogic(window, name);
+  }
+
+  initTemplateLogic(window, templateName) {
+    const modalConfig = PopupFactory.getModalConfig(templateName);
+    
+    if (modalConfig && typeof modalConfig.initForm === 'function') {
+      modalConfig.initForm(window.content);
+    }
   }
 
   close() {
@@ -69,6 +81,7 @@ export class ModalManager {
       this.currentModal.backdrop.hide();
       this.currentModal = null;
     }
+
     if (this.cleanupEscape) {
       this.cleanupEscape();
       this.cleanupEscape = null;

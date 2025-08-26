@@ -1,12 +1,10 @@
-// /script/modals/utils/ModalWindow.js
 import { DomUtils } from './utils/DomUtils.js';
 
 export class ModalWindow {
   constructor(modalContent, backgroundImage = null) {
     let template;
     let background;
-    
-    // Определяем шаблон и фон
+
     if (typeof modalContent === 'object' && modalContent !== null) {
       template = modalContent.template;
       background = modalContent.background || backgroundImage;
@@ -14,17 +12,15 @@ export class ModalWindow {
       template = modalContent;
       background = backgroundImage;
     } else {
-      console.error('Invalid modalContent:', modalContent);
-      template = '<div>Ошибка загрузки контента</div>';
+      console.error('ModalWindow: Invalid modalContent. Expected string or object with template.', modalContent);
+      template = '<div class="text-white">Ошибка: не удалось загрузить контент.</div>';
       background = backgroundImage;
     }
-    
-    // Формируем стиль фона
-    const bgStyle = background 
-      ? `background-image: url('${background}'); background-position: top;` 
-      : `background: linear-gradient(to bottom, #191919 0%, #24353E 50%, #000000 100%);`;
 
-    // Основной элемент модального окна
+    const bgStyle = background 
+      ? `background-image: url('${background}'); background-position: top;`
+      : 'background: linear-gradient(to bottom, #191919 0%, #24353E 50%, #000000 100%);';
+
     this.element = DomUtils.createElement('div', `
       relative 
       w-full max-w-[1440px]
@@ -46,7 +42,6 @@ export class ModalWindow {
       style: bgStyle
     });
 
-    // === КНОПКА ЗАКРЫТИЯ С УВЕЛИЧЕННОЙ ЗОНОЙ КЛИКА ===
     const closeBtn = DomUtils.createElement('button', `
       absolute top-4 right-4
       w-12 h-12
@@ -61,8 +56,6 @@ export class ModalWindow {
       focus:outline-none
       focus:ring-2 focus:ring-white focus:ring-opacity-30
       cursor-pointer
-
-      /* Увеличиваем кликабельную зону через псевдоэлемент */
       after:content-['']
       after:absolute
       after:inset-[-16px]
@@ -73,20 +66,16 @@ export class ModalWindow {
       'aria-label': 'Закрыть' 
     });
 
-    // Иконка закрытия
     const closeIcon = DomUtils.createElement('img', '', {
       src: '../assets/cross.svg',
       alt: 'Закрыть',
       width: '30',
-      height: '30',
-      zIndex: 20
+      height: '30'
     });
 
-    // Отключаем события на иконке, чтобы не мешала
     closeIcon.style.pointerEvents = 'none';
     closeBtn.appendChild(closeIcon);
 
-    // Обработчик закрытия
     closeBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       if (typeof this.onClose === 'function') {
@@ -94,26 +83,24 @@ export class ModalWindow {
       }
     });
 
-    // === ОСНОВНОЙ КОНТЕНТ ===
     const contentWrapper = DomUtils.createElement('div', `
       relative z-1 text-white
     `);
-    
-    if (template) {
+
+    if (template && template.trim() !== '') {
       contentWrapper.innerHTML = template;
     } else {
-      contentWrapper.innerHTML = '<div>Контент не загружен</div>';
-      console.error('Template is undefined:', modalContent);
+      contentWrapper.innerHTML = '<div class="p-4 text-center text-gray-300">Контент не загружен</div>';
+      console.warn('ModalWindow: template is empty or undefined');
     }
 
-    // Добавляем только кнопку (без лишнего closeArea)
+    this.content = contentWrapper;
+
     DomUtils.appendChildren(this.element, [closeBtn, contentWrapper]);
 
-    // Сохраняем ссылку
     this.closeBtn = closeBtn;
   }
 
-  // Метод для присоединения обработчика закрытия
   setOnClose(callback) {
     this.onClose = callback;
   }
