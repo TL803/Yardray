@@ -1,32 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Персональный подбор авто | ЯрДилер</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet" />
+    <!-- Подключаем шрифт Muller (аналог Commissioner, часто используется в РФ) -->
+    <link href="https://fonts.googleapis.com/css2?family=Muller:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- 2. Загружаем Tailwind CSS через CDN -->
+    <!-- Загружаем Tailwind CSS через CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../styles/style.css">
 
-    <!-- 3. Настраиваем Tailwind -->
+    <!-- Настраиваем Tailwind -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Muller', 'Commissioner', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-                    },
-                    backgroundColor: {
-                        'custom': '#25262A',
+                        sans: ['Muller', 'ui-sans-serif', 'system-ui', 'sans-serif'],
                     },
                     colors: {
                         primary: '#25262A',
                         secondary: '#19BC8D',
+                        accent: '#FF3B30',
                         tertiary: '#D2D2D2',
                         dark: '#13141770',
                         white: '#ffffff'
@@ -39,19 +36,133 @@
         };
     </script>
 
+    <!-- Встроенные стили -->
+    <style>
+        .container {
+            width: 1420px !important;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(90deg, rgba(37, 38, 42, 0.95) 30%, rgba(37, 38, 42, 0.7) 100%);
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+    </style>
 </head>
 
-<body>
-    <div class="flex flex-col gap-[50px] items-center">
-        <button class="bg-blue-400 w-max p-[20px] rounded-xl text-white" data-open-modal="order-car">Открыть модалку</button>
-        <button class="bg-blue-400 w-max p-[20px] rounded-xl text-white" data-open-modal="order-selected-car">Открыть тачку</button>
-        <button class="bg-blue-400 w-max p-[20px] rounded-xl text-white" data-open-modal="leasing">Открыть модалку лизинга</button>
-        <button class="bg-blue-400 w-max p-[20px] rounded-xl text-white" data-open-modal="trade-in">Открыть модалку Trade-in</button>
-        <button class="bg-blue-400 w-max p-[20px] rounded-xl text-white" data-open-modal="questions">Открыть модалку Questions</button>
-    </div>
+<body class="font-sans bg-gray-100">
+    <main>
+        <section class="container mx-auto mt-4 mb-12">
+            <div class="relative rounded-2xl overflow-hidden  bg-cover bg-center"
+                style="background-image: url('../assets/Главнаяч.png'); width: 100%; max-width: 1420px; height: 600px;">
 
+                <!-- Контент -->
+                <div
+                    class="relative z-10 flex flex-col md:flex-row items-end justify-between h-full p-8 md:p-12 text-white">
 
-    <script src="../script/main.js" type="module"></script>
+                    <!-- Левая часть -->
+                    <div class="md:w-1/2 mb-[80px]">
+                        <h1 class="text-4xl md:text-[36px] font-bold leading-tight mb-4 text-white">
+                            Персональный подбор авто —<br>без переплат и без лишних хлопот
+                        </h1>
+                        <p class="text-lg font-medium md:text-[24px] mb-8 ">
+                            Оставьте заявку, оператор поможет Вам в выборе авто без переплат!
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button
+                                class="bg-[#F32735] text-white font-bold py-4 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 pulse-animation flex items-center justify-center text-lg">
+                                <span>Оставить заявку!</span>
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Верхняя панель (хедер поверх фона) -->
+                <header>
+                    <div class="absolute  top-0 left-0 right-0 hidden md:flex justify-between items-center p-6 z-20">
+                        <!-- Логотип -->
+                        <img src="../assets/лого.svg" alt="Логотип ЯрДилер">
+
+                        <!-- Навигация -->
+                        <nav class=" space-x-8">
+                            <a href="#"
+                                class="text-[15px] text-white hover:text-accent transition-all font-regular">Преимущества</a>
+                            <a href="#"
+                                class="text-[15px] text-white hover:text-accent transition-all font-regular">Марки</a>
+                            <a href="#"
+                                class="text-[15px] text-white hover:text-accent transition-all font-regular">Наши
+                                услуги</a>
+                            <a href="#"
+                                class="text-[15px] text-white hover:text-accent transition-all font-regular">Специальные
+                                предложения</a>
+                        </nav>
+
+                        <!-- Контакты и кнопка -->
+                        <div class="flex items-center space-x-4">
+                            <div class="hidden lg:flex flex-col items-end">
+                                <a href="tel:+78001234567"
+                                    class="text-[15px] text-white font-regular hover:text-accent transition">+7 (999)
+                                    999-99-99</a>
+                            </div>
+                            <button
+                                class="bg-white text-gray-800 px-5 py-2 rounded-lg text-[15px] font-regular hover:bg-gray-200 transition flex items-center">
+                                <i class="fas fa-comment-dots mr-2"></i>
+                                <span>Остались вопросы?</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="md:hidden flex bg-red-500">
+                        <img src="../assets/лого.svg" alt="Логотип ЯрДилер">
+                        <div class="hidden lg:flex flex-col items-end">
+                            <a href="tel:+78001234567"
+                                class="text-[15px] text-white font-regular hover:text-accent transition">+7 (999)
+                                999-99-99</a>
+                        </div>
+                        <img src="../assets/Бургер меню.svg" alt="Бургер меню">
+                    </div>
+                </header>
+
+            </div>
+        </section>
+    </main>
+
 </body>
 
 </html>
