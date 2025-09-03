@@ -29,7 +29,7 @@
                         white: '#ffffff'
                     },
                     screens: {
-                        md: '1680px'
+                        md: '1420px'
                     },
                 }
             }
@@ -42,43 +42,17 @@
             width: 1420px !important;
         }
 
-        .hero-gradient {
-            background: linear-gradient(90deg, rgba(37, 38, 42, 0.95) 30%, rgba(37, 38, 42, 0.7) 100%);
+        .banner {
+            background-image: url('../assets/Главнаяч.png');
         }
 
-        .pulse-animation {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
+        @media (max-width: 1420px) {
+            .container {
+                max-width: 375px !important;
             }
 
-            50% {
-                transform: scale(1.05);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-15px);
-            }
-
-            100% {
-                transform: translateY(0px);
+            .banner {
+                background-image: url('../assets/mobile/Главнаяя.png');
             }
         }
     </style>
@@ -86,25 +60,24 @@
 
 <body class="font-sans bg-gray-100">
     <main>
-        <section class="container mx-auto mt-4 mb-12">
-            <div class="relative rounded-2xl overflow-hidden  bg-cover bg-center"
-                style="background-image: url('../assets/Главнаяч.png'); width: 100%; max-width: 1420px; height: 600px;">
+        <section class="container mx-auto md:mt-4 mb-12">
+            <div class="banner relative rounded-2xl overflow-hidden  bg-cover bg-center" style=" height: 600px;">
 
                 <!-- Контент -->
                 <div
-                    class="relative z-10 flex flex-col md:flex-row items-end justify-between h-full p-8 md:p-12 text-white">
+                    class="relative z-10 flex flex-col md:flex-row items-end justify-between h-full p-6 md:p-12 text-white">
 
                     <!-- Левая часть -->
-                    <div class="md:w-1/2 mb-[80px]">
-                        <h1 class="text-4xl md:text-[36px] font-bold leading-tight mb-4 text-white">
+                    <div class="md:w-1/2  mt-[116px] md:mb-[80px]">
+                        <h1 class="text-[20px] md:text-[36px] font-bold leading-tight mb-4 text-white">
                             Персональный подбор авто —<br>без переплат и без лишних хлопот
                         </h1>
-                        <p class="text-lg font-medium md:text-[24px] mb-8 ">
+                        <p class="text-[13px] font-medium md:text-[24px] mb-8 ">
                             Оставьте заявку, оператор поможет Вам в выборе авто без переплат!
                         </p>
-                        <div class="flex flex-col sm:flex-row gap-4">
+                        <div class="flex flex-col  gap-4">
                             <button
-                                class="bg-[#F32735] text-white font-bold py-4 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 pulse-animation flex items-center justify-center text-lg">
+                                class="bg-[#F32735] text-white font-bold w-max px-[23px] py-[8px] md:py-4 md:px-8 rounded-lg transition-all duration-200 transform hover:scale-105 pulse-animation flex items-center justify-center text-lg">
                                 <span>Оставить заявку!</span>
                                 <i class="fas fa-arrow-right ml-2"></i>
                             </button>
@@ -117,25 +90,26 @@
                 <header>
                     <div class="absolute  top-0 left-0 right-0 hidden md:flex justify-between items-center p-6 z-20">
                         <!-- Логотип -->
-                        <img src="../assets/лого.svg" alt="Логотип ЯрДилер">
+                        <div class="flex items-center gap-[30px]">
+                            <img src="../assets/лого.svg" alt="Логотип ЯрДилер">
 
-                        <!-- Навигация -->
-                        <nav class=" space-x-8">
-                            <a href="#"
-                                class="text-[15px] text-white hover:text-accent transition-all font-regular">Преимущества</a>
-                            <a href="#"
-                                class="text-[15px] text-white hover:text-accent transition-all font-regular">Марки</a>
-                            <a href="#"
-                                class="text-[15px] text-white hover:text-accent transition-all font-regular">Наши
-                                услуги</a>
-                            <a href="#"
-                                class="text-[15px] text-white hover:text-accent transition-all font-regular">Специальные
-                                предложения</a>
-                        </nav>
-
+                            <!-- Навигация -->
+                            <nav class=" space-x-8">
+                                <a href="#"
+                                    class="text-[15px] text-white hover:text-accent transition-all font-regular">Преимущества</a>
+                                <a href="#"
+                                    class="text-[15px] text-white hover:text-accent transition-all font-regular">Марки</a>
+                                <a href="#"
+                                    class="text-[15px] text-white hover:text-accent transition-all font-regular">Наши
+                                    услуги</a>
+                                <a href="#"
+                                    class="text-[15px] text-white hover:text-accent transition-all font-regular">Специальные
+                                    предложения</a>
+                            </nav>
+                        </div>
                         <!-- Контакты и кнопка -->
                         <div class="flex items-center space-x-4">
-                            <div class="hidden lg:flex flex-col items-end">
+                            <div class="flex-col items-end">
                                 <a href="tel:+78001234567"
                                     class="text-[15px] text-white font-regular hover:text-accent transition">+7 (999)
                                     999-99-99</a>
@@ -148,9 +122,9 @@
                         </div>
                     </div>
 
-                    <div class="md:hidden flex bg-red-500">
+                    <div class="absolute  top-0 left-0 right-0 flex md:hidden justify-between items-center p-6 z-20">
                         <img src="../assets/лого.svg" alt="Логотип ЯрДилер">
-                        <div class="hidden lg:flex flex-col items-end">
+                        <div class="  flex-col items-end">
                             <a href="tel:+78001234567"
                                 class="text-[15px] text-white font-regular hover:text-accent transition">+7 (999)
                                 999-99-99</a>
@@ -161,8 +135,112 @@
 
             </div>
         </section>
+
+
+        <section class="container mx-auto px-4">
+            <!-- Заголовок -->
+            <h2 class="text-2xl font-bold text-[#000000] mb-8">Преимущества</h2>
+
+            <!-- Горизонтальный скролл-контейнер (всегда) -->
+            <div class="overflow-x-auto pb-6 hide-scrollbar">
+                <div class="flex space-x-8 w-max md:w-auto">
+                    <!-- Карточка 1 -->
+                    <div
+                        class="bg-white rounded-xl p-[20px] shadow-sm border border-gray-100 min-w-[453px] max-w-[453px]">
+                        <img src="../assets/plashks/рукапожатие.png"
+                            alt="Только автомобили, прошедшие проверку до звонка!"
+                            class="w-full h-48 object-cover rounded-[12px]" />
+                        <div class="mt-4">
+                            <p class="text-gray-700 font-medium leading-tight">
+                                <span class="text-red-600">Только автомобили,</span><br />
+                                прошедшие проверку до звонка!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Карточка 2 -->
+                    <div
+                        class="bg-white rounded-xl p-[20px] shadow-sm border border-gray-100 min-w-[453px] max-w-[453px]">
+                        <img src="../assets/plashks/рукапожатие.png" alt="Полная ясность — без скрытых платежей"
+                            class="w-full h-48 object-cover rounded-[12px]" />
+                        <div class="mt-4">
+                            <p class="text-gray-700 font-medium leading-tight">
+                                <span class="text-red-600">Полная ясность —</span> без скрытых<br />
+                                платежей
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Карточка 3 -->
+                    <div
+                        class="bg-white rounded-xl p-[20px] shadow-sm border border-gray-100 min-w-[453px] max-w-[453px]">
+                        <img src="../assets/plashks/рукапожатие.png"
+                            alt="Комфорт — осмотр и приём машины проходят прямо у вашего дома"
+                            class="w-full h-48 object-cover rounded-[12px]" />
+                        <div class="mt-4">
+                            <p class="text-gray-700 font-medium leading-tight">
+                                <span class="text-red-600">Комфорт —</span> осмотр и приём машины проходят<br />
+                                прямо у вашего дома
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Стиль: скрыть полосу прокрутки (опционально) -->
+            <style>
+                .hide-scrollbar::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .hide-scrollbar {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+            </style>
+        </section>
+
+
+        <section class="container mx-auto">
+            <h2 class="text-2xl font-bold text-[#000000] mb-8">С какими марками мы работаем</h2>
+            <div id="marks" class="flex flex-wrap gap-[32px]">
+
+            </div>
+        </section>
     </main>
 
+<script>
+    const marksContainer = document.getElementById('marks');
+    const svgFiles = [
+        "46d2aa816134ef143792224f31e72c81 1.svg",
+        "250x40_baic-avilon_logo-01 1.svg",
+        "64058c056ae8be500c3ed669.svg",
+        "BBBE3BE+ROX.svg",
+        "belgee.svg",
+        "BESTUNE-LOGO-1.svg",
+        "bNVWHLMvZx0.svg",
+        "bSxKPM2Suu2H04HFOO3y.svg",
+        "gac.svg",
+        "gen380x2_3a7563dc-8980-4bee-a3be-2099924c...svg", // ⚠️ проверь имя файла
+        "i.svg",
+        "jaecoo.svg",
+        "logo-5.svg",
+        "logo-black-v.svg",
+        "peugeot-sa-eurl-logo.svg",
+        "soueast.svg",
+        "Vector.svg",
+        "Vector-1.svg"
+    ];
+
+    svgFiles.forEach(mark => {
+        const markElement = document.createElement('div');
+        markElement.className = 'max-w-[211px] min-w-[211px] max-h-[119px] min-h-[119px] bg-white flex items-center justify-center rounded-[24px]';
+        markElement.innerHTML = `
+            <img src="${mark}" alt="Логотип бренда" class="max-h-full max-w-full object-contain p-4">
+        `;
+
+        marksContainer.append(markElement);
+    });
+</script>
 </body>
 
 </html>
