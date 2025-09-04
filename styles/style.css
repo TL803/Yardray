@@ -109,3 +109,32 @@
 .custom-checkbox-input:checked + label::after {
   opacity: 1;
 }
+
+
+
+
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+
+
+
+  .slide {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Активный bullet — серый */
+  .bullet.bg-gray-400 {
+    background-color: #9ca3af !important;
+    border-color: #6b7280 !important;
+  }

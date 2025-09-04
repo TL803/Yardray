@@ -8,6 +8,7 @@
 
     <!-- Подключаем шрифт Muller (аналог Commissioner, часто используется в РФ) -->
     <link href="https://fonts.googleapis.com/css2?family=Muller:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/style.css">
 
     <!-- Загружаем Tailwind CSS через CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -36,6 +37,8 @@
         };
     </script>
 
+
+
     <!-- Встроенные стили -->
     <style>
         .container {
@@ -59,7 +62,7 @@
 </head>
 
 <body class="font-sans bg-gray-100">
-    <main>
+    <main class="mb-[60px]">
         <section class="container mx-auto md:mt-4 mb-12">
             <div class="banner relative rounded-2xl overflow-hidden  bg-cover bg-center" style=" height: 600px;">
 
@@ -137,19 +140,19 @@
         </section>
 
 
-        <section class="container mx-auto px-4">
+        <section class="container mx-auto">
             <!-- Заголовок -->
             <h2 class="text-2xl font-bold text-[#000000] mb-8">Преимущества</h2>
 
             <!-- Горизонтальный скролл-контейнер (всегда) -->
             <div class="overflow-x-auto pb-6 hide-scrollbar">
-                <div class="flex space-x-8 w-max md:w-auto">
+                <div class="flex space-x-[32px] w-max md:w-auto">
                     <!-- Карточка 1 -->
                     <div
-                        class="bg-white rounded-xl p-[20px] shadow-sm border border-gray-100 min-w-[453px] max-w-[453px]">
-                        <img src="../assets/plashks/рукапожатие.png"
+                        class="bg-white rounded-xl p-[20px] shadow-sm border border-gray-100 md:min-w-[453px]  md:w-[453px]  w-[254px]  ">
+                        <img src="../assets/plashks/Rectangle 32.png"
                             alt="Только автомобили, прошедшие проверку до звонка!"
-                            class="w-full h-48 object-cover rounded-[12px]" />
+                            class="w-full h-[127px] md:h-48 object-cover rounded-[12px]" />
                         <div class="mt-4">
                             <p class="text-gray-700 font-medium leading-tight">
                                 <span class="text-red-600">Только автомобили,</span><br />
@@ -160,9 +163,9 @@
 
                     <!-- Карточка 2 -->
                     <div
-                        class="bg-white rounded-xl p-[20px] shadow-sm border border-gray-100 min-w-[453px] max-w-[453px]">
+                        class="bg-white rounded-xl p-[20px] shadow-sm border border-gray-100 md:min-w-[453px]  md:w-[453px]  w-[254px]  ">
                         <img src="../assets/plashks/рукапожатие.png" alt="Полная ясность — без скрытых платежей"
-                            class="w-full h-48 object-cover rounded-[12px]" />
+                            class="w-full h-[127px] md:h-48 object-cover rounded-[12px]" />
                         <div class="mt-4">
                             <p class="text-gray-700 font-medium leading-tight">
                                 <span class="text-red-600">Полная ясность —</span> без скрытых<br />
@@ -173,10 +176,10 @@
 
                     <!-- Карточка 3 -->
                     <div
-                        class="bg-white rounded-xl p-[20px] shadow-sm border border-gray-100 min-w-[453px] max-w-[453px]">
-                        <img src="../assets/plashks/рукапожатие.png"
+                        class="bg-white rounded-xl p-[20px] shadow-sm border border-gray-100 md:w-[453px]  w-[254px]  ">
+                        <img src="../assets/plashks/Rectangle 3222.png"
                             alt="Комфорт — осмотр и приём машины проходят прямо у вашего дома"
-                            class="w-full h-48 object-cover rounded-[12px]" />
+                            class="w-full h-[127px] md:h-48 object-cover rounded-[12px]" />
                         <div class="mt-4">
                             <p class="text-gray-700 font-medium leading-tight">
                                 <span class="text-red-600">Комфорт —</span> осмотр и приём машины проходят<br />
@@ -188,59 +191,336 @@
             </div>
             <!-- Стиль: скрыть полосу прокрутки (опционально) -->
             <style>
-                .hide-scrollbar::-webkit-scrollbar {
-                    display: none;
-                }
 
-                .hide-scrollbar {
-                    -ms-overflow-style: none;
-                    scrollbar-width: none;
-                }
             </style>
         </section>
 
 
         <section class="container mx-auto">
             <h2 class="text-2xl font-bold text-[#000000] mb-8">С какими марками мы работаем</h2>
-            <div id="marks" class="flex flex-wrap gap-[32px]">
+            <div id="marks" class="flex flex-wrap gap-[30px]">
 
             </div>
         </section>
+        <section class="py-8">
+            <div class="container mx-auto px-4">
+                <!-- Заголовок -->
+                <h2 class="text-2xl font-bold text-[#000000] mb-8">Наши услуги</h2>
+
+                <!-- Контейнер для десктопного скролла -->
+                <div class="hidden md:block overflow-x-auto overflow-y-hidden pb-6 hide-scrollbar px-0 cursor-grab active:cursor-grabbing relative"
+                    id="scroll-wrapper">
+                    <div class="flex gap-[32px] w-max" id="scroll-container">
+                        <!-- Карточка 1 -->
+                        <div
+                            class="relative w-[575px] h-[689px] rounded-[24px] overflow-hidden shadow-lg flex-shrink-0">
+                            <img src="../assets/services/Плашка купить авто 1.png" alt="Покупка авто"
+                                class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6">
+                                <h3 class="text-white text-[36px] font-bold mb-4">Покупка авто</h3>
+                                <p class="text-white text-[16px] leading-relaxed mb-6">
+                                    Быстро, прозрачно и с гарантией. Вы называете бюджет и пожелания, мы подбираем
+                                    лучшие
+                                    варианты!<br>
+                                    Мы сопровождаем Вас на каждом этапе, экономя время и деньги.
+                                </p>
+                                <button
+                                    class="w-full py-[20px] bg-red-600 text-white text-[20px] font-bold rounded-[12px] hover:bg-red-700 transition-colors">
+                                    Получить предложение!
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Карточка 2 -->
+                        <div
+                            class="relative w-[575px] h-[689px] rounded-[24px] overflow-hidden shadow-lg flex-shrink-0">
+                            <img src="../assets/services/трейд ин.png" alt="Trade-in"
+                                class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6">
+                                <h3 class="text-white text-[36px] font-bold mb-4">Trade-in</h3>
+                                <p class="text-white text-[16px] leading-relaxed mb-6">
+                                    Вы привозите в автосалон свою машину, её оценивают специалисты, и эта сумма идёт в
+                                    счёт
+                                    покупки новой машины.<br>
+                                    Если стоимость нового авто выше — Вы доплачиваете разницу.
+                                </p>
+                                <button
+                                    class="w-full py-[20px] bg-red-600 text-white text-[20px] font-bold rounded-[12px] hover:bg-red-700 transition-colors">
+                                    Оставить заявку!
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Карточка 3 -->
+                        <div
+                            class="relative w-[575px] h-[689px] rounded-[24px] overflow-hidden shadow-lg flex-shrink-0">
+                            <img src="../assets/services/лизинг.png" alt="Лизинг" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6">
+                                <h3 class="text-white text-[36px] font-bold mb-4">Лизинг</h3>
+                                <p class="text-white text-[16px] leading-relaxed mb-6">
+                                    Хотите ездить на новом авто и платить помесячно? Лизинг —<br>
+                                    удобная альтернатива покупки за наличные или кредит:<br>
+                                    минимальный аванс, комфортные платежи
+                                </p>
+                                <button
+                                    class="w-full py-[20px] bg-red-600 text-white text-[20px] font-bold rounded-[12px] hover:bg-red-700 transition-colors">
+                                    Подобрать авто!
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Мобилка: колонка -->
+                <div class="md:hidden flex flex-col items-center gap-6">
+                    <!-- Карточка 1 -->
+                    <div class="relative w-[342px] h-[347px] rounded-[24px] overflow-hidden shadow-lg">
+                        <img src="../assets/services/Плашка купить авто 1.png" alt="Покупка авто"
+                            class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6">
+                            <h3 class="text-white text-[16px] font-bold mb-4">Покупка авто</h3>
+                            <p class="text-white text-[14px] leading-relaxed mb-6">
+                                Быстро, прозрачно и с гарантией. Вы называете бюджет и пожелания, мы подбираем лучшие
+                                варианты!<br>
+                                Мы сопровождаем Вас на каждом этапе, экономя время и деньги.
+                            </p>
+                            <button
+                                class="w-full py-[12px] bg-red-600 text-white text-[15px] font-bold rounded-[12px] hover:bg-red-700 transition-colors">
+                                Получить предложение!
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Карточка 2 -->
+                    <div class="relative w-[342px] h-[347px] rounded-[24px] overflow-hidden shadow-lg">
+                        <img src="../assets/services/трейд ин.png" alt="Trade-in" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6">
+                            <h3 class="text-white text-[16px] font-bold mb-4">Trade-in</h3>
+                            <p class="text-white text-[14px] leading-relaxed mb-6">
+                                Вы привозите в автосалон свою машину, её оценивают специалисты, и эта сумма идёт в счёт
+                                покупки новой машины.<br>
+                                Если стоимость нового авто выше — Вы доплачиваете разницу.
+                            </p>
+                            <button
+                                class="w-full py-[12px] bg-red-600 text-white text-[15px] font-bold rounded-[12px] hover:bg-red-700 transition-colors">
+                                Оставить заявку!
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Карточка 3 -->
+                    <div class="relative w-[342px] h-[347px] rounded-[24px] overflow-hidden shadow-lg">
+                        <img src="../assets/services/лизинг.png" alt="Лизинг" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6">
+                            <h3 class="text-white text-[16px] font-bold mb-4">Лизинг</h3>
+                            <p class="text-white text-[14px] leading-relaxed mb-6">
+                                Хотите ездить на новом авто и платить помесячно? Лизинг —<br>
+                                удобная альтернатива покупки за наличные или кредит:<br>
+                                минимальный аванс, комфортные платежи
+                            </p>
+                            <button
+                                class="w-full py-[12px] bg-red-600 text-white text-[15px] font-bold rounded-[12px] hover:bg-red-700 transition-colors">
+                                Подобрать авто!
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="container mx-auto">
+            <h2 class="text-2xl font-bold text-[#000000]">С какими марками мы работаем</h2>
+
+            <!-- Контейнер слайдера с обрезкой -->
+            <div class="relative mx-auto overflow-hidden">
+                <!-- Слайдер -->
+                <div id="slider" class="flex transition-transform duration-500 ease-in-out">
+
+                    <!-- Слайд 1 -->
+                    <div class="slide cursor-pointer flex-shrink-0 w-full flex mt-[140px] justify-center">
+                        <!-- Мобильная версия (до md) -->
+                        <img src="../assets/banners/adaptive/баик.png" alt="Baik Mobile" draggable="false"
+                            class="md:hidden mb-[120px]">
+                        <!-- Десктопная версия (от md и выше) -->
+                        <img src="../assets/banners/баик.png" alt="Baik Desktop" draggable="false"
+                            class="hidden md:block">
+                    </div>
+
+                    <!-- Слайд 2 -->
+                    <div class="slide cursor-pointer flex-shrink-0 w-full flex justify-center">
+                        <img src="../assets/banners/adaptive/кайо.png" alt="Banner 2 Mobile" draggable="false"
+                            class="md:hidden">
+                        <img src="../assets/banners/Баннер 2 _ Специальные предложения _ блок 5.png"
+                            alt="Banner 2 Desktop" draggable="false" class="hidden md:block">
+                    </div>
+
+                    <!-- Слайд 3 -->
+                    <div class="slide cursor-pointer flex-shrink-0 w-full flex justify-center">
+                        <img src="../assets/banners/adaptive/ливан.png" alt="Banner 3 Mobile" draggable="false"
+                            class="md:hidden ">
+                        <img src="../assets/banners/Баннер 3 _Специальные предложения блок 5.png" alt="Banner 3 Desktop"
+                            draggable="false" class="hidden md:block">
+                    </div>
+                </div>
+
+                <!-- Индикаторы -->
+                <div class="flex justify-center mt-4 absolute bottom-40 left-8 space-x-3">
+                    <button
+                        class="bullet w-8 h-1 bg-white border border-gray-300 rounded-full hover:bg-gray-100 transition"></button>
+                    <button
+                        class="bullet w-8 h-1 bg-white border border-gray-300 rounded-full hover:bg-gray-100 transition"></button>
+                    <button
+                        class="bullet w-8 h-1 bg-white border border-gray-300 rounded-full hover:bg-gray-100 transition"></button>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="container mx-auto px-4 py-16 md:py-20">
+            <h2 class="text-3xl font-bold text-[#000000] mb-8">О Ярдрее</h2>
+
+            <div class="flex flex-col md:flex-row items-center gap-6 ">
+                <!-- Левый блок: текст -->
+                <div class="w-full md:w-1/2 bg-white rounded-xl p-6 h-[680px] shadow-sm border border-gray-200">
+                    <p class="text-gray-800 leading-relaxed mb-5 text-[12px] md:text-[16px]">
+                        Ярдрей — это больше, чем просто имя. За ним стоят годы опыта, доверие тысяч автолюбителей и
+                        непоколебимая приверженность качеству. Начинался путь Ярдрея с простых обзоров и юридической
+                        помощи автовладельцам, ставших первыми свидетелями его профессионализма и искреннего желания
+                        сделать автомобильный рынок честнее и прозрачнее.
+                    </p>
+                    <p class="text-gray-800 leading-relaxed mb-5 text-[12px] md:text-[16px]">
+                        Сегодня, спустя годы успешной карьеры блогера и юриста, Ярдрей открывает новую страницу своей
+                        истории — он сам становится продавцом автомобилей, предлагая своим подписчикам и сторонникам
+                        уникальный выбор машин, проверенных лично и заслуживших доверие тысяч водителей.
+                    </p>
+                    <p class="text-gray-800 leading-relaxed mb-5 text-[12px] md:text-[16px]">
+                        Каждый автомобиль, представленный на сайте, прошёл строгий отбор, исходя из тех принципов,
+                        благодаря которым Ярдрей заработал свою известность: тщательная проверка каждого экземпляра,
+                        максимальная прозрачность условий продажи и абсолютная уверенность в качестве каждой машины.
+                    </p>
+                    <p class="text-gray-800 leading-relaxed text-[12px] md:text-[16px]">
+                        Выбирая автомобиль на сайте Ярдрея, вы получаете гораздо больше, чем просто транспортное
+                        средство. Вы становитесь частью сообщества, объединённого верой в честность и открытость
+                        автомобильного рынка. Ведь каждый автомобиль здесь — это гарантия надёжности, комфорта и
+                        уверенности на дороге.
+                    </p>
+                </div>
+
+
+
+                <div>
+                    <img src="../assets/Баннер для блока о Ярдрее.png" alt="">
+                </div>
+                <!-- Правый блок: изображение с надписью -->
+
+            </div>
+        </section>
+
+
+        <section
+            class="container mx-auto px-8 py-16 relative bg-cover bg-top bg-no-repeat rounded-xl shadow-2xl md:min-h-[700px] p-10"
+            style="background-image: url('../assets/womanCar.png'); ">
+
+            <!-- Фон с затемнением -->
+            <div class="absolute inset-0 bg-black bg-opacity-70 rounded-xl -z-10"></div>
+
+
+
+            <!-- Контент -->
+            <div class="relative z-1 text-white">
+
+                <div class="flex flex-col  space-y-8">
+                    <div class="text-center space-y-6 max-w-3xl">
+                        <h3 class="text-[20px] md:text-4xl font-bold leading-tight">Остались вопросы?</h3>
+                        <p class="text-[14px] md:text-xl leading-relaxed">
+                            Оставьте ваши контакты и мы свяжемся с Вами в ближайшее время, чтобы ответить на все вопросы
+                            и помочь Вам!
+                        </p>
+                    </div>
+
+                    <form id="questions-form" data-modal-form="questions" class="space-y-8 mt-2 w-full max-w-3xl">
+                        <!-- Поле ФИО -->
+                        <div>
+                            <input type="text" name="full_name" required
+                                class="w-full h-[60px] px-6 bg-[#F8F8F852] border border-[#F8F8F852] rounded-xl
+                               text-white placeholder-white placeholder-opacity-70 text-base font-normal
+                               focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-60 focus:border-red-400" placeholder="ФИО" minlength="2"
+                                maxlength="100">
+                            <div class="error-message text-red-300 text-sm mt-1 hidden"></div>
+                        </div>
+
+                        <!-- Поле телефона -->
+                        <div>
+                            <input type="tel" name="phone" required
+                                class="w-full h-[60px] px-6 bg-[#F8F8F852] border border-[#F8F8F852] rounded-xl
+                               text-white placeholder-white placeholder-opacity-70 text-base font-normal
+                               focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-60 focus:border-red-400" placeholder="Ваш телефон">
+                            <div class="error-message text-red-300 text-sm mt-1 hidden"></div>
+                        </div>
+
+                        <!-- Чекбокс -->
+                        <div class="flex items-start mt-1">
+                            <input type="checkbox" name="privacy_policy" required checked
+                                class="mt-1.5 w-5 h-5 custom-checkbox-input border border-[#F8F8F852] rounded bg-transparent focus:ring-red-400"
+                                id="privacy-policy">
+                            <label for="privacy-policy" class="ml-2 text-sm text-gray-300 leading-tight">
+                                Я согласен с политикой обработки персональных данных
+                            </label>
+                            <div class="error-message text-red-300 text-sm mt-1 ml-7 hidden"></div>
+                        </div>
+
+                        <button type="button" id="submit-questions"
+                            class="w-full h-[40px] md:h-[84px] bg-red-600 hover:bg-red-700 text-white text-[12px] md:text-2xl font-semibold rounded-2xl
+                           transition duration-200 transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                            Перезвоните мне!
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+
+
     </main>
 
-<script>
-    const marksContainer = document.getElementById('marks');
-    const svgFiles = [
-        "46d2aa816134ef143792224f31e72c81 1.svg",
-        "250x40_baic-avilon_logo-01 1.svg",
-        "64058c056ae8be500c3ed669.svg",
-        "BBBE3BE+ROX.svg",
-        "belgee.svg",
-        "BESTUNE-LOGO-1.svg",
-        "bNVWHLMvZx0.svg",
-        "bSxKPM2Suu2H04HFOO3y.svg",
-        "gac.svg",
-        "gen380x2_3a7563dc-8980-4bee-a3be-2099924c...svg", // ⚠️ проверь имя файла
-        "i.svg",
-        "jaecoo.svg",
-        "logo-5.svg",
-        "logo-black-v.svg",
-        "peugeot-sa-eurl-logo.svg",
-        "soueast.svg",
-        "Vector.svg",
-        "Vector-1.svg"
-    ];
+    <footer class="relative w-full h-[500px] overflow-hidden">
+        <!-- Фоновое изображение -->
+        <div class="absolute inset-0 bg-cover bg-top bg-no-repeat"
+            style="background-image: url('../assets/Футтер.png'); /* Укажите путь к вашему фону */">
+            <!-- Поверх фона — затемнение -->
+        </div>
 
-    svgFiles.forEach(mark => {
-        const markElement = document.createElement('div');
-        markElement.className = 'max-w-[211px] min-w-[211px] max-h-[119px] min-h-[119px] bg-white flex items-center justify-center rounded-[24px]';
-        markElement.innerHTML = `
-            <img src="${mark}" alt="Логотип бренда" class="max-h-full max-w-full object-contain p-4">
-        `;
+        <!-- Контент футера -->
+        <div
+            class="relative z-10 container mx-auto px-6 py-8 md:py-12 flex flex-col md:flex-row items-start justify-between">
 
-        marksContainer.append(markElement);
-    });
-</script>
+            <!-- Левая часть: контакты -->
+            <div class="text-white mb-8 md:mb-0">
+                <h3 class="text-lg font-semibold mb-4">Контакты</h3>
+                <ul class="space-y-8 text-[24px]">
+                    <li>+7 999 999 99 99</li>
+                    <li>pochta@gmail.com</li>
+                    <li>pochta@yandex.com</li>
+                </ul>
+            </div>
+
+            <!-- Правая часть: логотип -->
+            <div class="flex justify-end">
+                <img src="../assets/лого.svg" alt="Логотип ЯрДилер" class="w-16 h-16">
+            </div>
+        </div>
+
+        <!-- Нижняя строка: юридическая информация -->
+        <div class="relative z-10 text-center text-white text-[16px] md:text-[24px] mt-20">
+            ИП Подшивалов А.А., ИНН 772881014703
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="../script/components/iteration/markIteration.js"></script>
+    <script src="../script/components/scroll/serviceScroll.js"></script>
+    <script src="../script/components/sliders/carSlider.js"></script>
 </body>
 
 </html>
