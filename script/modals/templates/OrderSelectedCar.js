@@ -1,4 +1,9 @@
-export class OrderSelectedCar {
+// /script/modals/templates/OrderSelectedCar.js
+
+import { TemplateRenderer } from './BaseTemplate.js';
+import { FormInitializer } from './BaseTemplate.js';
+
+export class OrderSelectedCar extends TemplateRenderer {
   static getTemplate() {
     /* html */
     return `
@@ -10,10 +15,13 @@ export class OrderSelectedCar {
                 Заявка на покупку HAVAL
               </h3>
               <p class="text-[20px] text-white text-center leading-relaxed">
-Заполните анкету, мы свяжемся с Вами 
-в ближайшее время, чтобы подобрать идеальный автомобиль для Вас!
+                Заполните анкету, мы свяжемся с Вами 
+                в ближайшее время, чтобы подобрать идеальный автомобиль для Вас!
               </p>
             </div>
+
+            <!-- Контейнер ошибок -->
+            <div id="form-errors" class="errors mt-2 px-4 text-center"></div>
 
             <form id="order-selected-car-form" data-modal-form="order-selected-car" class="space-y-8 mt-2 w-full">
               <!-- Кастомный селект: Марка машины -->
@@ -21,6 +29,7 @@ export class OrderSelectedCar {
                 <div class="relative w-full">
                   <select 
                     name="car_brand" 
+                    data-content="carBrand"
                     required 
                     class="custom-select-native opacity-0 absolute inset-0 w-full h-[60px] cursor-pointer z-10"
                     id="car-brand-select"
@@ -49,6 +58,7 @@ export class OrderSelectedCar {
                 <div class="relative w-full">
                   <select 
                     name="car_model" 
+                    data-content="carModel"
                     required 
                     class="custom-select-native opacity-0 absolute inset-0 w-full h-[60px] cursor-pointer z-10"
                     id="car-model-select"
@@ -77,6 +87,7 @@ export class OrderSelectedCar {
                 <input 
                   type="text" 
                   name="full_name" 
+                  data-content="fullName"
                   required 
                   class="w-full h-[60px] px-6 
                          bg-[#F8F8F852] border border-[#F8F8F852] rounded-xl
@@ -97,6 +108,7 @@ export class OrderSelectedCar {
                 <input 
                   type="tel" 
                   name="phone" 
+                  data-content="phone"
                   required 
                   class="w-full h-[60px] px-6 
                          bg-[#F8F8F852] border border-[#F8F8F852] rounded-xl
@@ -115,6 +127,7 @@ export class OrderSelectedCar {
                 <input 
                   type="checkbox" 
                   name="privacy_policy" 
+                  data-content="agree"
                   required 
                   checked
                   class="mt-1.5 w-5 h-5 custom-checkbox-input border border-[#F8F8F852] rounded bg-transparent focus:ring-red-400"
@@ -137,8 +150,8 @@ export class OrderSelectedCar {
         />
         <div class="w-full px-8 mt-6 relative">
           <button 
-            type="button"
-            id="submit-selected-car"
+            type="submit"
+            form="order-selected-car-form"
             class="w-full h-[84px] 
                    bg-red-600 hover:bg-red-700 
                    text-white text-[24px] font-semibold 
@@ -192,155 +205,79 @@ export class OrderSelectedCar {
     `;
   }
 
+  // Инициализация: кастомные селекты + общая логика
   static initForm(modalElement, modalWindow) {
     this.initCustomSelects(modalElement);
 
-    const form = modalElement.querySelector('#order-selected-car-form');
-    const submitBtn = modalElement.querySelector('#submit-selected-car');
+    FormInitializer.initForm(modalElement, this, () => {
+      // Дополнительная валидация кастомных селектов
+      const brandSelect = modalElement.querySelector('#car-brand-select');
+      const modelSelect = modalElement.querySelector('#car-model-select');
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      this.validateAndSubmit(form, modalElement, modalWindow);
-    };
+      let isValid = true;
 
-    submitBtn.addEventListener('click', handleSubmit);
-    form.addEventListener('submit', handleSubmit);
+      if (!brandSelect.value) {
+        this.markAsInvalid(modalElement, 'carBrand');
+        isValid = false;
+      } else {
+        this.clearInvalid(modalElement, 'carBrand');
+      }
+
+      if (!modelSelect.value) {
+        this.markAsInvalid(modalElement, 'carModel');
+        isValid = false;
+      } else {
+        this.clearInvalid(modalElement, 'carModel');
+      }
+
+      return isValid;
+    }, () => {
+      // onSuccess — после успешной отправки
+      if (modalWindow && typeof modalWindow.setBackground === 'function') {
+        modalWindow.setBackground('../assets/popup/nature.png');
+      }
+    });
   }
 
+  // Инициализация отображения селектов
   static initCustomSelects(modalElement) {
     const brandSelect = modalElement.querySelector('#car-brand-select');
-    const brandDisplay = modalElement.querySelector('#car-brand-display');
     const brandLabel = modalElement.querySelector('#car-brand-label');
-
     const modelSelect = modalElement.querySelector('#car-model-select');
-    const modelDisplay = modalElement.querySelector('#car-model-display');
     const modelLabel = modalElement.querySelector('#car-model-label');
 
     brandSelect.addEventListener('change', () => {
       brandLabel.textContent = brandSelect.options[brandSelect.selectedIndex].text;
     });
 
-    brandDisplay.addEventListener('click', () => {
-      brandSelect.focus();
-    });
-
     modelSelect.addEventListener('change', () => {
       modelLabel.textContent = modelSelect.options[modelSelect.selectedIndex].text;
     });
 
-    modelDisplay.addEventListener('click', () => {
-      modelSelect.focus();
-    });
+    modalElement.querySelector('#car-brand-display').addEventListener('click', () => brandSelect.focus());
+    modalElement.querySelector('#car-model-display').addEventListener('click', () => modelSelect.focus());
   }
 
-  static validateAndSubmit(form, modalElement, modalWindow) {
-    let isValid = true;
+  // Подсветка ошибок для кастомных полей
+  static markAsInvalid(modalElement, contentType) {
+    const selector = contentType === 'carBrand'
+      ? '#car-brand-display'
+      : contentType === 'carModel'
+        ? '#car-model-display'
+        : `[data-content="${contentType}"]`;
 
-    form.querySelectorAll('.error-message').forEach(el => {
-      el.classList.add('hidden');
-      el.textContent = '';
-    });
-
-    const fieldsToValidate = [
-      { element: form.car_brand, validator: this.validateSelect.bind(this) },
-      { element: form.car_model, validator: this.validateSelect.bind(this) },
-      { element: form.full_name, validator: this.validateName.bind(this) },
-      { element: form.phone, validator: this.validatePhone.bind(this) },
-      { element: form.privacy_policy, validator: this.validateCheckbox.bind(this) }
-    ];
-
-    fieldsToValidate.forEach(({ element, validator }) => {
-      if (!validator(element)) {
-        isValid = false;
-      }
-    });
-
-    if (isValid) {
-      this.submitForm(form, modalElement, modalWindow);
-    }
+    const el = modalElement.querySelector(selector);
+    if (el) el.classList.add('border-red-500', 'ring-red-500');
   }
 
-static validateName(input) {
-  const value = input.value.trim();
+  static clearInvalid(modalElement, contentType) {
+    const selector = contentType === 'carBrand'
+      ? '#car-brand-display'
+      : contentType === 'carModel'
+        ? '#car-model-display'
+        : `[data-content="${contentType}"]`;
 
-  if (!value) {
-    this.showError(input, 'Введите ваше ФИО');
-    return false;
-  }
-  const words = value.split(' ').filter(word => word.length > 0);
-  if (words.length < 1) {
-    this.showError(input, 'Введите хотя бы одно имя');
-    return false;
-  }
-
-  return true;
-}
-
-  static validatePhone(input) {
-    const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
-    if (!input.value.trim()) {
-      this.showError(input, 'Введите номер телефона');
-      return false;
-    }
-    if (!phoneRegex.test(input.value.replace(/\s/g, ''))) {
-      this.showError(input, 'Введите корректный номер телефона');
-      return false;
-    }
-    return true;
-  }
-
-  static validateSelect(select) {
-    if (!select.value) {
-      this.showError(select, `Выберите ${select.name === 'car_brand' ? 'марку' : 'модель'} машины`);
-      return false;
-    }
-    return true;
-  }
-
-  static validateCheckbox(checkbox) {
-    if (!checkbox.checked) {
-      const label = checkbox.closest('div').querySelector('label');
-      let errorDiv = label.nextElementSibling;
-
-      if (!errorDiv || !errorDiv.classList.contains('error-message')) {
-        errorDiv = document.createElement('div');
-        errorDiv.className = 'error-message text-red-300 text-sm mt-1 ml-7';
-        label.parentNode.insertBefore(errorDiv, label.nextSibling);
-      }
-
-      errorDiv.classList.remove('hidden');
-      errorDiv.textContent = 'Необходимо согласие с политикой';
-      return false;
-    }
-    return true;
-  }
-
-  static showError(inputElement, message) {
-    const parent = inputElement.closest('div');
-    let errorDiv = parent.querySelector('.error-message');
-
-    if (!errorDiv) {
-      errorDiv = document.createElement('div');
-      errorDiv.className = 'error-message text-red-300 text-sm mt-1';
-      parent.appendChild(errorDiv);
-    }
-
-    errorDiv.classList.remove('hidden');
-    errorDiv.textContent = message;
-  }
-
-  static submitForm(form, modalElement, modalWindow) {
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData);
-    console.log('Отправлено (выбранный автомобиль):', data);
-
-    modalWindow.setBackground('../assets/popup/nature.png');
-
-    modalElement.innerHTML = this.getSuccessTemplate();
-
-    setTimeout(() => {
-      const closeBtn = modalElement.querySelector('[data-close-modal]');
-      if (closeBtn) closeBtn.focus();
-    }, 100);
+    const el = modalElement.querySelector(selector);
+    if (el) el.classList.remove('border-red-500', 'ring-red-500');
   }
 }

@@ -1,5 +1,5 @@
 import { TemplateRenderer } from './BaseTemplate.js';
-import { FormInitializer } from './FormInitializer.js'; // ← Добавьте
+import { FormInitializer } from './BaseTemplate.js'; // ← Добавьте
 
 export class Questions extends TemplateRenderer {
   static getTemplate() {

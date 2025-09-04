@@ -20,7 +20,7 @@ export class ModalWindow {
         }
 
         const bgStyle = background 
-            ? `background-image: url('${background}'); background-position: 100% center; background-size: cover;` 
+            ? `background-image: url('${background}'); background-position: top; background-size: cover;` 
             : `background: #170D08;`;
 
         this.element = DomUtils.createElement('div', `
