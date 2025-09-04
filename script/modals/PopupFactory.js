@@ -5,24 +5,23 @@ import { OrderTradeIn } from "../modals/templates/OrderTradeIn.js"
 import { Questions } from "../modals/templates/Questions.js"
 
 export class PopupFactory {
-  static createModal(modalType, params = {}) {
-    const modalConfig = this.getModalConfig(modalType);
+    static createModal(modalType) {
+        const modalConfig = this.getModalConfig(modalType);
 
-    if (!modalConfig) {
-      throw new Error(`Не найдена конфигурация для модалки: ${modalType}`);
+        if (!modalConfig) {
+            throw new Error(`Не найдена конфигурация для модалки: ${modalType}`);
+        }
+
+        return {
+            template: modalConfig.getTemplate(),
+            background: modalConfig.getBackground(),
+            onInit: (element) => {
+                if (typeof modalConfig.initForm === 'function') {
+                    modalConfig.initForm(element);
+                }
+            }
+        };
     }
-
-    const template = typeof modalConfig.getTemplate === 'function' 
-      ? modalConfig.getTemplate(params) 
-      : modalConfig.getTemplate();
-    
-    const background = params.background || modalConfig.getBackground();
-
-    return {
-      template: template,
-      background: background
-    };
-  }
 
   static getModalConfig(type) {
     switch (type) {

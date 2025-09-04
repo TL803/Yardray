@@ -1,14 +1,11 @@
-// /script/modals/templates/Questions.js
-
-import { TemplateRenderer } from './TemplateRenderer.js';
-import { FormInitializer } from './FormInitializer.js';
-import { ErrorDisplay } from './ErrorDisplay.js';
+import { TemplateRenderer } from './BaseTemplate.js';
+import { FormInitializer } from './FormInitializer.js'; // ← Добавьте
 
 export class Questions extends TemplateRenderer {
   static getTemplate() {
     /* html */
     return `
-      <div class="flex flex-col items-between h-full">
+      <div class="flex flex-col items-between">
         <div class="w-[685px] bg-transparent rounded-xl overflow-hidden">
           <div class="text-white space-y-8 p-[20px]">
             <div class="flex flex-col gap-[20px]">
@@ -21,17 +18,14 @@ export class Questions extends TemplateRenderer {
               </p>
             </div>
 
-            <!-- Контейнер для ошибок -->
-            <div id="form-errors" class="errors text-center"></div>
-
             <form id="questions-form" data-modal-form="questions" class="space-y-8 mt-2 w-full">
               <!-- Поле ФИО -->
               <div>
                 <input 
                   type="text" 
                   name="full_name" 
-                  required 
                   data-content="fullName"
+                  required 
                   class="w-full h-[60px] px-6 
                          bg-[#F8F8F852] border border-[#F8F8F852] rounded-xl
                          text-white placeholder-white placeholder-opacity-70 
@@ -50,8 +44,8 @@ export class Questions extends TemplateRenderer {
                 <input 
                   type="tel" 
                   name="phone" 
-                  required 
                   data-content="phone"
+                  required 
                   class="w-full h-[60px] px-6 
                          bg-[#F8F8F852] border border-[#F8F8F852] rounded-xl
                          text-white placeholder-white placeholder-opacity-70 
@@ -68,9 +62,9 @@ export class Questions extends TemplateRenderer {
                 <input 
                   type="checkbox" 
                   name="privacy_policy" 
+                  data-content="agree"
                   required 
                   checked
-                  data-content="agree"
                   class="mt-1.5 w-5 h-5 custom-checkbox-input border border-[#F8F8F852] rounded bg-transparent focus:ring-red-400"
                   id="privacy-policy"
                 >
@@ -93,10 +87,14 @@ export class Questions extends TemplateRenderer {
                    rounded-2xl
                    transition duration-200 
                    transform hover:scale-[1.01] 
-                   focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                   focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+          >
             Перезвоните мне!
           </button>
         </div>
+        
+        <!-- Контейнер для ошибок (обязательно с id) -->
+        <div id="form-errors" class="errors mt-4 px-8 text-center"></div>
       </div>
     `;
   }
@@ -136,7 +134,7 @@ export class Questions extends TemplateRenderer {
     `;
   }
 
-  // Инициализация формы через FormInitializer
+  // ✅ Обязательно: инициализация формы
   static initForm(modalElement) {
     FormInitializer.initForm(modalElement, this);
   }

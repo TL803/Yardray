@@ -4,86 +4,69 @@ import { PopupFactory } from './PopupFactory.js';
 import { DomUtils } from './utils/DomUtils.js';
 
 export class ModalManager {
-  constructor() {
-    this.currentModal = null;
-    this.cleanupEscape = null;
-    this.init();
-  }
+    constructor() {
+        this.currentModal = null;
+        this.cleanupEscape = null;
+        this.init();
+    }
 
-  init() {
-    document.addEventListener('click', (e) => {
-      const trigger = e.target.closest('[data-open-modal]');
-      if (trigger) {
-        e.preventDefault();
-        const modalName = trigger.getAttribute('data-open-modal');
-        const params = this.parseModalParams(trigger);
-        this.open(modalName, params);
-      }
+    init() {
+        document.addEventListener('click', (e) => {
+            const trigger = e.target.closest('[data-open-modal]');
+            if (trigger) {
+                e.preventDefault();
+                const modalName = trigger.getAttribute('data-open-modal');
+                const params = this.parseModalParams(trigger);
+                this.open(modalName, params);
+            }
+        });
+    }
 
-      if (e.target.closest('[data-close-modal]')) {
+    parseModalParams(trigger) {
+        const params = {};
+        const attributes = trigger.attributes;
+        for (let i = 0; i < attributes.length; i++) {
+            const attr = attributes[i];
+            if (attr.name.startsWith('data-param-')) {
+                const paramName = attr.name.replace('data-param-', '');
+                params[paramName] = attr.value;
+            }
+        }
+        return params;
+    }
+
+    open(name, params = {}) {
         this.close();
-      }
-    });
-  }
 
-  parseModalParams(trigger) {
-    const params = {};
-    const attributes = trigger.attributes;
-    for (let i = 0; i < attributes.length; i++) {
-      const attr = attributes[i];
-      if (attr.name.startsWith('data-param-')) {
-        const paramName = attr.name.replace('data-param-', '');
-        params[paramName] = attr.value;
-      }
-      
-      if (attr.name === 'data-background') {
-        params.background = attr.value;
-      }
-    }
-    return params;
-  }
+        const modalContent = PopupFactory.createModal(name);
 
-  open(name, params = {}) {
-    this.close();
+        const window = new ModalWindow(modalContent);
+        const backdrop = new ModalBackdrop();
 
-    const modalContent = PopupFactory.createModal(name, params);
-    const backgroundImage = params.background || modalContent.background;
+        backdrop.element.appendChild(window.element);
+        this.currentModal = { backdrop, window };
 
-    const window = new ModalWindow(modalContent, backgroundImage);
-    const backdrop = new ModalBackdrop();
+        window.closeBtn.addEventListener('click', () => this.close());
 
-    backdrop.element.appendChild(window.element);
-    this.currentModal = { backdrop, window };
+        backdrop.element.addEventListener('click', (e) => {
+            DomUtils.closeOnBackdrop(e, backdrop.element, () => this.close());
+        });
 
-    window.closeBtn.addEventListener('click', () => this.close());
+        this.cleanupEscape = DomUtils.onEscape(() => this.close());
 
-    backdrop.element.addEventListener('click', (e) => {
-      DomUtils.closeOnBackdrop(e, backdrop.element, () => this.close());
-    });
+        backdrop.show();
 
-    this.cleanupEscape = DomUtils.onEscape(() => this.close());
-    backdrop.show();
-
-    this.initTemplateLogic(window, name);
-  }
-
-  initTemplateLogic(window, templateName) {
-    const modalConfig = PopupFactory.getModalConfig(templateName);
-    
-    if (modalConfig && typeof modalConfig.initForm === 'function') {
-      modalConfig.initForm(window.content, window);
-    }
-  }
-
-  close() {
-    if (this.currentModal) {
-      this.currentModal.backdrop.hide();
-      this.currentModal = null;
+        DomUtils.focusFirstInput(window.element);
     }
 
-    if (this.cleanupEscape) {
-      this.cleanupEscape();
-      this.cleanupEscape = null;
+    close() {
+        if (this.currentModal) {
+            this.currentModal.backdrop.hide();
+            this.currentModal = null;
+        }
+        if (this.cleanupEscape) {
+            this.cleanupEscape();
+            this.cleanupEscape = null;
+        }
     }
-  }
 }
