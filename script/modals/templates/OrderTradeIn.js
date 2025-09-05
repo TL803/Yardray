@@ -7,7 +7,7 @@ export class OrderTradeIn extends TemplateRenderer {
   static getTemplate() {
     /* html */
     return `
-      <div class="flex flex-col items-center h-full w-full">
+      <div class="flex flex-col  h-full w-full">
         <!-- Контейнер: 100% на мобильных, 685px на десктопе -->
         <div class="w-full sm:w-[685px] bg-transparent rounded-xl overflow-hidden">
           <div class="text-white space-y-4 sm:space-y-8 p-4 sm:p-[20px]">
@@ -64,20 +64,20 @@ export class OrderTradeIn extends TemplateRenderer {
               </div>
 
               <!-- Чекбокс согласия -->
-              <div class="flex items-start mt-1">
+              <div class="flex items-start mt-1 transition-all duration-500">
                 <input 
                   type="checkbox" 
                   name="privacy_policy" 
                   data-content="agree"
                   required 
                   checked
-                  class="mt-1.5 w-4 h-4 sm:w-5 sm:h-5 border border-[#F8F8F852] rounded bg-transparent focus:ring-red-400"
+                  class="mt-1 w-4 h-4 sm:w-5 sm:h-5 custom-checkbox-input border border-[#F8F8F852] rounded bg-transparent focus:ring-red-400 transition-all duration-500"
                   id="privacy-policy"
                 >
-                <label for="privacy-policy" class="ml-2 text-xs sm:text-sm text-gray-300 leading-tight">
+                <label for="privacy-policy" class="ml-2 text-xs sm:text-[14px] text-gray-300 leading-tight transition-all duration-500">
                   Я согласен с политикой обработки персональных данных
                 </label>
-                <div class="error-message text-red-300 text-sm mt-1 ml-7 hidden"></div>
+                <div class="error-message text-red-300 text-xs sm:text-sm mt-1 ml-5 sm:ml-7 hidden"></div>
               </div>
             </form>
           </div>

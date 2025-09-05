@@ -1,8 +1,66 @@
+// OrderSelectedCar.js
+
 import { TemplateRenderer } from './BaseTemplate.js';
 import { FormInitializer } from './BaseTemplate.js';
 
 export class OrderSelectedCar extends TemplateRenderer {
-  static getTemplate() {
+  // === Карта: бренд → базовое имя изображения ===
+  // Добавь свои изображения в папку ../assets/popup/
+  static CAR_IMAGES = {
+    Haval: "../assets/man.png",
+    Chery: "Dargo 1.png",
+    ROX: "Dargo 1.png",
+    GAC: "Dargo 1.png",
+    Jetta: "Dargo 1.png",
+    MG: "Dargo 1.png",
+    Bestune: "T77 1.png",
+    Changan: "CS75 1.png",
+    Peugeot: "3008 1.png",
+    Kaiy: "Kaiyi 1.png",
+    Belgee: "X50 1.png",
+    SWM: "X3 1.png",
+    BAIC: "BJ40 1.png",
+    Citroën: "C5 1.png",
+    Jaecoo: "J7 1.png",
+    Soueast: "DX7 1.png",
+    // fallback
+    default: "Dargo 1.png"
+  };
+
+  /**
+   * Возвращает имя файла изображения в зависимости от бренда и дня недели
+   * @param {string} brand - Название бренда
+   * @returns {string} Имя файла изображения
+   */
+  static getCarImageByBrandAndDay(brand) {
+    const dayOfWeek = new Date().getDay(); // 0 = воскресенье, 1 = понедельник...
+    const baseImage = this.CAR_IMAGES[brand] || this.CAR_IMAGES.default;
+
+    // Разные варианты изображений (можно расширить)
+    const variants = [
+      baseImage,
+      baseImage.replace('.png', '-alt1.png'),
+      baseImage.replace('.png', '-alt2.png'),
+      baseImage.replace('.png', '-promo.png'),
+      baseImage.replace('.png', '-night.png'),
+      baseImage.replace('.png', '.png'),
+      baseImage.replace('.png', '-classic.png'),
+      baseImage.replace('.png', '-sport.png')
+    ];
+
+    // Циклически выбираем изображение по дню недели
+    return variants[dayOfWeek % variants.length];
+  }
+
+  /**
+   * Основной шаблон модального окна
+   * @param {Object} options - Параметры (brand)
+   * @returns {string} HTML-разметка
+   */
+  static getTemplate(options = {}) {
+    const brand = options.brand || 'не выбрана';
+    const carImage = this.getCarImageByBrandAndDay(brand);
+
     /* html */
     return `
       <div class="w-full h-full flex flex-col">
@@ -12,12 +70,11 @@ export class OrderSelectedCar extends TemplateRenderer {
             <!-- Заголовок -->
             <div class="flex flex-col gap-3 sm:gap-[12px] mb-4">
               <h3 class="text-2xl sm:text-3xl md:text-[40px] font-bold text-center leading-tight transition-all duration-500">
-                Заявка на покупку <span id="selected-model" class="text-red-400">не выбрана</span>
+                Заявка на покупку <span id="selected-model" class="text-red-400">${brand}</span>
               </h3>
               <p class="text-sm sm:text-base md:text-[18px] text-white text-center leading-relaxed transition-all duration-500">
                 Выбранная комплектация: <span id="selected-trim" class="text-red-400">не выбрана</span>
               </p>
-
             </div>
 
             <!-- Ошибки -->
@@ -123,7 +180,7 @@ export class OrderSelectedCar extends TemplateRenderer {
               </div>
 
               <!-- Чекбокс -->
-              <div class="flex items-start mt-1 transition-all duration-500">
+                 <div class="flex items-start mt-1 transition-all duration-500">
                 <input 
                   type="checkbox" 
                   name="privacy_policy" 
@@ -142,7 +199,7 @@ export class OrderSelectedCar extends TemplateRenderer {
           </div>
         </div>
 
-        <!-- Фон (только десктоп, изначально скрыт) -->
+        <!-- Фон (только десктоп) -->
         <img 
           class="absolute top-0 pointer-events-none w-[300px] xl:w-[400px] 2xl:w-[550px] right-2 xl:right-4 2xl:right-[60px] z-0 opacity-0 transition-all duration-700 hidden xl:block" 
           src="../assets/popup/Vector 4.png" 
@@ -167,11 +224,11 @@ export class OrderSelectedCar extends TemplateRenderer {
             Получить предложение!
           </button>
 
-          <!-- Машина — изначально полностью скрыта -->
+          <!-- Динамическая картинка машины -->
           <img 
             class="absolute bottom-[30px] sm:bottom-[20px] pointer-events-none w-[200px] md:w-[700px] right-[50px] xl:right-[20px] z-20 opacity-0 transition-all duration-700 scale-95 hidden" 
-            src="../assets/popup/Dargo 1.png" 
-            alt="Car"
+            src="../assets/popup/${carImage}" 
+            alt="Car" 
             id="car-image"
           />
         </div>
@@ -179,23 +236,33 @@ export class OrderSelectedCar extends TemplateRenderer {
     `;
   }
 
+  /**
+   * Фон модального окна (не используется)
+   */
   static getBackground() {
     return null;
   }
 
-  // === АДАПТИВНЫЙ УСПЕШНЫЙ ШАБЛОН ===
-  static getSuccessTemplate() {
+  /**
+   * Успешный экран после отправки
+   * @param {Object} options - Параметры (brand)
+   * @returns {string} HTML-разметка
+   */
+  static getSuccessTemplate(options = {}) {
+    const brand = options.brand || 'не выбрана';
+    const successCarImage = this.getCarImageByBrandAndDay(brand);
+
     /* html */
     return `
       <div class="relative w-full h-full flex flex-col items-center justify-between px-4 sm:px-6 py-6 sm:py-8 text-center overflow-hidden">
-        <!-- Фон на всю ширину и высоту -->
+        <!-- Фон -->
         <img 
           src="../assets/popup/nature.png" 
           alt="Background" 
           class="absolute inset-0 w-full h-full object-cover object-center z-0 pointer-events-none"
         />
 
-        <!-- Основной текст -->
+        <!-- Текст -->
         <div class="relative z-10 mt-8 sm:mt-12 xl:mt-20">
           <h2 class="text-2xl sm:text-3xl xl:text-[40px] 2xl:text-[52px] font-bold text-white mb-4 leading-tight">
             Заявка отправлена!
@@ -220,9 +287,9 @@ export class OrderSelectedCar extends TemplateRenderer {
           Отлично!
         </button>
 
-        <!-- Машина — прижата к низу экрана, центрирована -->
+        <!-- Машина внизу -->
         <img 
-          src="../assets/popup/Dargo 1.png" 
+          src="../assets/popup/${successCarImage}" 
           alt="Car" 
           class="absolute bottom-0 left-1/2 transform -translate-x-1/2 
                  w-[60%] sm:w-[70%] xl:w-[80%] max-w-[800px] h-auto 
@@ -233,13 +300,28 @@ export class OrderSelectedCar extends TemplateRenderer {
     `;
   }
 
-  static initForm(modalElement, modalWindow) {
+  /**
+   * Инициализация формы
+   * @param {HTMLElement} modalElement - DOM-элемент модалки
+   * @param {Object|null} modalWindow - ссылка на окно (не используется)
+   * @param {Object} options - параметры (brand)
+   */
+  static initForm(modalElement, modalWindow, options = {}) {
+    const brand = options.brand || null;
+
+    // Подставляем бренд в заголовок
+    if (brand) {
+      const selectedModel = modalElement.querySelector('#selected-model');
+      if (selectedModel) selectedModel.textContent = brand;
+    }
+
+    // Инициализируем кастомные селекты
     this.initCustomSelects(modalElement);
 
+    // Инициализируем валидацию формы
     FormInitializer.initForm(modalElement, this, () => {
       const modelSelect = modalElement.querySelector('#car-model-select');
       const trimSelect = modalElement.querySelector('#car-trim-select');
-
       let isValid = true;
 
       if (!modelSelect.value) {
@@ -258,12 +340,19 @@ export class OrderSelectedCar extends TemplateRenderer {
 
       return isValid;
     }, () => {
-      if (modalWindow && typeof modalWindow.setBackground === 'function') {
-        modalWindow.setBackground('../assets/popup/nature.png');
-      }
+      // При успешной отправке — показываем успех
+      modalElement.innerHTML = this.getSuccessTemplate(options);
+
+      // Закрытие по кнопке
+      modalElement.querySelector('[data-close-modal]').addEventListener('click', () => {
+        window.closeModal();
+      });
     });
   }
 
+  /**
+   * Настройка кастомных селектов
+   */
   static initCustomSelects(modalElement) {
     const modelSelect = modalElement.querySelector('#car-model-select');
     const modelLabel = modalElement.querySelector('#car-model-label');
@@ -271,24 +360,25 @@ export class OrderSelectedCar extends TemplateRenderer {
     const trimLabel = modalElement.querySelector('#car-trim-label');
     const carImage = modalElement.querySelector('#car-image');
     const backgroundVector = modalElement.querySelector('#background-vector');
-
     const selectedModel = modalElement.querySelector('#selected-model');
     const selectedTrim = modalElement.querySelector('#selected-trim');
     const formContainer = modalElement.querySelector('.form-container');
 
     const fixFormSize = () => {
-      formContainer.style.width = '100%';
-      formContainer.style.maxWidth = '800px';
-      formContainer.style.height = 'auto';
-      formContainer.style.minHeight = '400px';
-      formContainer.style.transition = 'all 0.5s ease-in-out';
+      Object.assign(formContainer.style, {
+        width: '100%',
+        maxWidth: '800px',
+        minHeight: '400px',
+        transition: 'all 0.5s ease-in-out'
+      });
     };
 
     const resetFormSize = () => {
-      formContainer.style.width = '';
-      formContainer.style.maxWidth = '';
-      formContainer.style.height = '';
-      formContainer.style.minHeight = '';
+      Object.assign(formContainer.style, {
+        width: '',
+        maxWidth: '',
+        minHeight: ''
+      });
     };
 
     const areBothSelected = () => modelSelect.value && trimSelect.value;
@@ -324,7 +414,7 @@ export class OrderSelectedCar extends TemplateRenderer {
     };
 
     const showBackground = () => {
-      if (window.innerWidth >= 1280) { // xl breakpoint
+      if (window.innerWidth >= 1280) {
         backgroundVector.classList.remove('hidden');
         requestAnimationFrame(() => {
           backgroundVector.classList.remove('opacity-0');
@@ -335,7 +425,6 @@ export class OrderSelectedCar extends TemplateRenderer {
 
     const hideBackground = () => {
       backgroundVector.classList.add('opacity-0');
-      backgroundVector.classList.remove('opacity-100');
       setTimeout(() => {
         if (backgroundVector.classList.contains('opacity-0')) {
           backgroundVector.classList.add('hidden');
@@ -383,26 +472,22 @@ export class OrderSelectedCar extends TemplateRenderer {
       }
     });
 
+    // Адаптация при ресайзе
     window.addEventListener('resize', () => {
-      if (areBothSelected()) {
-        if (window.innerWidth >= 1280) { // xl breakpoint
-          if (backgroundVector.classList.contains('hidden')) {
-            backgroundVector.classList.remove('hidden');
-            requestAnimationFrame(() => {
-              backgroundVector.classList.remove('opacity-0');
-              backgroundVector.classList.add('opacity-100');
-            });
-          }
-        } else {
-          backgroundVector.classList.remove('opacity-100');
-          backgroundVector.classList.add('opacity-0');
-          setTimeout(() => {
-            backgroundVector.classList.add('hidden');
-          }, 700);
+      if (areBothSelected() && window.innerWidth >= 1280) {
+        if (backgroundVector.classList.contains('hidden')) {
+          backgroundVector.classList.remove('hidden');
+          requestAnimationFrame(() => {
+            backgroundVector.classList.remove('opacity-0');
+            backgroundVector.classList.add('opacity-100');
+          });
         }
+      } else {
+        hideBackground();
       }
     });
 
+    // Клик по дисплею открывает селект
     modalElement.querySelector('#car-model-display').addEventListener('click', () => modelSelect.focus());
     modalElement.querySelector('#car-trim-display').addEventListener('click', () => {
       if (!trimSelect.disabled) trimSelect.focus();
@@ -422,6 +507,9 @@ export class OrderSelectedCar extends TemplateRenderer {
     }
   }
 
+  /**
+   * Помечает поле как ошибочное
+   */
   static markAsInvalid(modalElement, contentType) {
     const selector = contentType === 'carModel'
       ? '#car-model-display'
@@ -433,6 +521,9 @@ export class OrderSelectedCar extends TemplateRenderer {
     if (el) el.classList.add('border-red-500', 'ring-red-500');
   }
 
+  /**
+   * Снимает пометку ошибки
+   */
   static clearInvalid(modalElement, contentType) {
     const selector = contentType === 'carModel'
       ? '#car-model-display'

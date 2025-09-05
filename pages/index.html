@@ -37,14 +37,11 @@
         };
     </script>
 
-<!-- Стили Swiper -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-/>
+    <!-- Стили Swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-<!-- Скрипт Swiper -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Скрипт Swiper -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <!-- Встроенные стили -->
     <style>
@@ -55,17 +52,17 @@
         .banner {
             background-image: url('../assets/Главнаяч.png');
         }
-.bg-gradient-auto {
-  background: linear-gradient(
-    135deg,
-    #24353E 0%,
-    #1e2b34 40%,
-    #1a232b 70%,
-    #0f151a 100%
-  );
-  background-size: cover;
-  height: 600px;
-}
+
+        .bg-gradient-auto {
+            background: linear-gradient(135deg,
+                    #24353E 0%,
+                    #1e2b34 40%,
+                    #1a232b 70%,
+                    #0f151a 100%);
+            background-size: cover;
+            height: 600px;
+        }
+
         @media (max-width: 1420px) {
             .container {
                 max-width: 375px !important;
@@ -80,108 +77,112 @@
 
 <body class="font-sans bg-gray-100">
     <main class="mb-[60px] space-y-[60px]">
-<section class="container mx-auto md:mt-4 mb-12">
-  <div class="banner-slider relative rounded-2xl overflow-hidden" style="height: 600px;">
-    
-    <div class="swiper bannerSwiper h-full">
-      <div class="swiper-wrapper">
+        <section class="container mx-auto md:mt-4 mb-12">
+            <div class="banner-slider relative rounded-2xl overflow-hidden" style="height: 600px;">
 
-        <div 
-          class="swiper-slide banner"
-          style=" background-size: cover; background-position: center;"
-        >
-          <div class="relative z-10 flex flex-col md:flex-row items-end justify-between h-full p-6 md:p-12 text-white">
-            <div class="md:w-1/2 mt-[116px] md:mb-[80px]">
-              <h1 class="text-[20px] md:text-[36px] font-bold leading-tight mb-4 text-white">
-                Персональный подбор авто —<br>без переплат и без лишних хлопот
-              </h1>
-              <p class="text-[13px] font-medium md:text-[24px] mb-8">
-                Оставьте заявку, оператор поможет Вам в выборе авто без переплат!
-              </p>
-              <div class="flex flex-col gap-4">
-                <button
-                  class="bg-[#F32735] text-white font-bold w-max px-[23px] py-[8px] md:py-4 md:px-8 rounded-lg transition-all duration-200 transform hover:scale-105 pulse-animation flex items-center justify-center text-lg">
-                  <span>Оставить заявку!</span>
-                  <i class="fas fa-arrow-right ml-2"></i>
-                </button>
-              </div>
+                <div class="swiper bannerSwiper h-full">
+                    <div class="swiper-wrapper">
+
+                        <div class="swiper-slide banner" style=" background-size: cover; background-position: center;">
+                            <div
+                                class="relative z-10 flex flex-col md:flex-row items-end justify-between h-full p-6 md:p-12 text-white">
+                                <div class="md:w-1/2 mt-[116px] md:mb-[80px]">
+                                    <h1 class="text-[20px] md:text-[36px] font-bold leading-tight mb-4 text-white">
+                                        Персональный подбор авто —<br>без переплат и без лишних хлопот
+                                    </h1>
+                                    <p class="text-[13px] font-medium md:text-[24px] mb-8">
+                                        Оставьте заявку, оператор поможет Вам в выборе авто без переплат!
+                                    </p>
+                                    <div class="flex flex-col gap-4">
+                                        <button
+                                            class="bg-[#F32735] text-white font-bold w-max px-[23px] py-[8px] md:py-4 md:px-8 rounded-lg transition-all duration-200 transform hover:scale-105 pulse-animation flex items-center justify-center text-lg">
+                                            <span>Оставить заявку!</span>
+                                            <i class="fas fa-arrow-right ml-2"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Баннер 2 -->
+                        <div class="swiper-slide"
+                            style="background-color: #0f151a; background-image: linear-gradient(180deg, #1a232b, #0f151a); background-size: cover; background-position: center;">
+                            <div
+                                class="relative z-10 flex flex-col md:flex-row items-end justify-between h-full p-6 md:p-12 text-white">
+                                <div class="md:w-1/2 mt-[116px] md:mb-[80px]">
+                                    <h1 class="text-[20px] md:text-[36px] font-bold leading-tight mb-4">
+                                        Эксклюзив для первых 20<br>покупателей!
+                                    </h1>
+                                    <p class="text-[13px] font-medium md:text-[24px] mb-8">
+                                        Станьте одним из первых 20 счастливчиков<br>
+                                        и получите автомобиль лично из рук Ярдрея!
+                                    </p>
+                                    <button
+                                        class="bg-red-600 text-white font-bold w-max px-[23px] py-[8px] md:py-4 md:px-8 rounded-lg transition-all duration-200 transform hover:scale-105 pulse-animation flex items-center justify-center text-lg">
+                                        <span>Оставить заявку!</span>
+                                        <i class="fas fa-arrow-right ml-2"></i>
+                                    </button>
+                                </div>
+                                <div class="md:w-1/2 flex justify-end items-end">
+                                    <img src="../assets/ac95fbd81a3503c9d62cbe7929d3c2343723118d.png"
+                                        alt="Автомобиль с подарочной лентой"
+                                        class="w-full h-full object-cover shadow-xl max-w-none"
+                                        style="width: 100%; height: 100%; object-fit: cover;" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <header>
+                    <!-- Десктоп -->
+                    <div class="absolute top-0 left-0 right-0 hidden md:flex justify-between items-center p-6 z-20">
+                        <div class="flex items-center gap-[30px]">
+                            <img src="../assets/лого.svg" alt="Логотип ЯрДилер">
+                            <nav class="space-x-8">
+                                <a href="#advantages"
+                                    class="text-[15px] text-white hover:text-accent transition-all font-regular nav-link">Преимущества</a>
+                                <a href="#marks-section"
+                                    class="text-[15px] text-white hover:text-accent transition-all font-regular nav-link">Марки</a>
+                                <a href="#services"
+                                    class="text-[15px] text-white hover:text-accent transition-all font-regular nav-link">Наши
+                                    услуги</a>
+                                <a href="#special-offers"
+                                    class="text-[15px] text-white hover:text-accent transition-all font-regular nav-link">Специальные
+                                    предложения</a>
+                            </nav>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-col items-end">
+                                <a href="tel:+79999999999"
+                                    class="text-[15px] text-white font-regular hover:text-accent transition">+7 (999)
+                                    999-99-99</a>
+                            </div>
+                            <button data-open-modal="questions"
+                                class="bg-white text-gray-800 px-5 py-2 rounded-lg text-[15px] font-regular hover:bg-gray-200 transition flex items-center">
+                                <i class="fas fa-comment-dots mr-2"></i>
+                                <span>Остались вопросы?</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Мобильный -->
+                    <div class="absolute top-0 left-0 right-0 flex md:hidden justify-between items-center p-6 z-20">
+                        <img src="../assets/лого.svg" alt="Логотип ЯрДилер" class="h-8">
+                        <a href="tel:+79999999999"
+                            class="text-[15px] text-white font-regular hover:text-accent transition">+7 (999)
+                            999-99-99</a>
+                    </div>
+                </header>
+
             </div>
-          </div>
-        </div>
-
-        <!-- Баннер 2 -->
-        <div 
-          class="swiper-slide"
-          style="background-color: #0f151a; background-image: linear-gradient(180deg, #1a232b, #0f151a); background-size: cover; background-position: center;"
-        >
-          <div class="relative z-10 flex flex-col md:flex-row items-end justify-between h-full p-6 md:p-12 text-white">
-            <div class="md:w-1/2 mt-[116px] md:mb-[80px]">
-              <h1 class="text-[20px] md:text-[36px] font-bold leading-tight mb-4">
-                Эксклюзив для первых 20<br>покупателей!
-              </h1>
-              <p class="text-[13px] font-medium md:text-[24px] mb-8">
-                Станьте одним из первых 20 счастливчиков<br>
-                и получите автомобиль лично из рук Ярдрея!
-              </p>
-              <button
-                class="bg-red-600 text-white font-bold w-max px-[23px] py-[8px] md:py-4 md:px-8 rounded-lg transition-all duration-200 transform hover:scale-105 pulse-animation flex items-center justify-center text-lg">
-                <span>Оставить заявку!</span>
-                <i class="fas fa-arrow-right ml-2"></i>
-              </button>
-            </div>
-            <div class="md:w-1/2 flex justify-end items-end">
-              <img 
-                src="../assets/ac95fbd81a3503c9d62cbe7929d3c2343723118d.png" 
-                alt="Автомобиль с подарочной лентой"
-                class="w-full h-full object-cover shadow-xl max-w-none"
-                style="width: 100%; height: 100%; object-fit: cover;"
-              />
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Хедер поверх слайдера -->
-    <header>
-      <!-- Десктоп -->
-      <div class="absolute top-0 left-0 right-0 hidden md:flex justify-between items-center p-6 z-20">
-        <div class="flex items-center gap-[30px]">
-          <img src="../assets/лого.svg" alt="Логотип ЯрДилер" >
-          <nav class="space-x-8">
-            <a href="#" class="text-[15px] text-white hover:text-accent transition-all font-regular">Преимущества</a>
-            <a href="#" class="text-[15px] text-white hover:text-accent transition-all font-regular">Марки</a>
-            <a href="#" class="text-[15px] text-white hover:text-accent transition-all font-regular">Наши услуги</a>
-            <a href="#" class="text-[15px] text-white hover:text-accent transition-all font-regular">Специальные предложения</a>
-          </nav>
-        </div>
-        <div class="flex items-center space-x-4">
-          <div class="flex-col items-end">
-            <a href="tel:+79999999999" class="text-[15px] text-white font-regular hover:text-accent transition">+7 (999) 999-99-99</a>
-          </div>
-          <button data-open-modal="questions"
-            class="bg-white text-gray-800 px-5 py-2 rounded-lg text-[15px] font-regular hover:bg-gray-200 transition flex items-center">
-            <i class="fas fa-comment-dots mr-2"></i>
-            <span>Остались вопросы?</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Мобильный -->
-      <div class="absolute top-0 left-0 right-0 flex md:hidden justify-between items-center p-6 z-20">
-        <img src="../assets/лого.svg" alt="Логотип ЯрДилер" class="h-8">
-        <a href="tel:+79999999999" class="text-[15px] text-white font-regular hover:text-accent transition">+7 (999) 999-99-99</a>
-      </div>
-    </header>
-
-  </div>
-</section>
+        </section>
 
 
         <section class="container mx-auto px-4">
             <!-- Заголовок -->
-            <h2 class="text-2xl font-bold text-[#000000] mb-8">Преимущества</h2>
+            <h2 id="advantages" class="text-2xl font-bold text-[#000000] mb-8">Преимущества</h2>
 
             <!-- Горизонтальный скролл-контейнер (всегда) -->
             <div class="overflow-x-auto pb-6 hide-scrollbar">
@@ -235,23 +236,23 @@
         </section>
 
 
-        <section class="container mx-auto px-4">
-            <h2 class="text-2xl font-bold text-[#000000] mb-8">С какими марками мы работаем</h2>
+        <section  class="container mx-auto px-4">
+            <h2 id="marks-section" class="text-2xl font-bold text-[#000000] mb-8">С какими марками мы работаем</h2>
             <div id="marks" class="flex flex-wrap gap-[8px] md:gap-[24px]">
 
             </div>
         </section>
-        <section class="py-8  md:px-4">
+        <section id="services" class="py-8  md:px-4">
             <div class="container mx-auto px-4 ">
                 <!-- Заголовок -->
-                <h2 class="text-2xl font-bold text-[#000000] mb-8">Наши услуги</h2>
+                <h2   class="text-2xl font-bold text-[#000000] mb-8">Наши услуги</h2>
 
                 <!-- Контейнер для десктопного скролла -->
                 <div class="hidden md:block overflow-x-auto overflow-y-hidden pb-6 hide-scrollbar px-0 cursor-grab active:cursor-grabbing relative"
                     id="scroll-wrapper">
                     <div class="flex gap-[32px] w-max" id="scroll-container">
                         <!-- Карточка 1 -->
-                        <div  
+                        <div
                             class="relative w-[575px] h-[689px] rounded-[24px] overflow-hidden shadow-lg flex-shrink-0">
                             <img src="../assets/services/Плашка купить авто 1.png" alt="Покупка авто"
                                 class="w-full h-full object-cover">
@@ -271,7 +272,7 @@
                         </div>
 
                         <!-- Карточка 2 -->
-                        <div 
+                        <div
                             class="relative w-[575px] h-[689px] rounded-[24px] overflow-hidden shadow-lg flex-shrink-0">
                             <img src="../assets/services/трейд ин.png" alt="Trade-in"
                                 class="w-full h-full object-cover">
@@ -291,7 +292,7 @@
                         </div>
 
                         <!-- Карточка 3 -->
-                        <div 
+                        <div
                             class="relative w-[575px] h-[689px] rounded-[24px] overflow-hidden shadow-lg flex-shrink-0">
                             <img src="../assets/services/лизинг.png" alt="Лизинг" class="w-full h-full object-cover">
                             <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6">
@@ -369,35 +370,37 @@
 
 
         <section class="container mx-auto px-4">
-            <h2 class="text-2xl font-bold text-[#000000]">Специальные предложения </h2>
+            <h2 id="special-offers" class="text-2xl font-bold text-[#000000]">Специальные предложения </h2>
 
             <div class="relative mx-auto overflow-hidden ">
                 <!-- Слайдер -->
                 <div id="slider" class="flex transition-transform duration-500 ease-in-out ">
 
                     <!-- Слайд 1 -->
-                    <div  class="slide cursor-pointer flex-shrink-0 w-full flex mt-[140px] justify-center">
+                    <div class="slide cursor-pointer flex-shrink-0 w-full flex mt-[140px] justify-center">
                         <!-- Мобильная версия (до md) -->
-                        <img data-open-modal="order-selected-car" src="../assets/banners/adaptive/баик.png" alt="Baik Mobile" draggable="false"
-                            class="md:hidden mb-[120px]">
+                        <img data-open-modal="order-selected-car" src="../assets/banners/adaptive/баик.png"
+                            alt="Baik Mobile" draggable="false" class="md:hidden mb-[120px]">
                         <!-- Десктопная версия (от md и выше) -->
-                        <img data-open-modal="order-selected-car" src="../assets/banners/баик.png" alt="Baik Desktop" draggable="false"
-                            class="hidden md:block">
+                        <img data-open-modal="order-selected-car" src="../assets/banners/баик.png" alt="Baik Desktop"
+                            draggable="false" class="hidden md:block">
                     </div>
 
                     <!-- Слайд 2 -->
                     <div class="slide cursor-pointer flex-shrink-0 w-full flex justify-center">
-                        <img data-open-modal="order-selected-car" src="../assets/banners/adaptive/кайо.png" alt="Banner 2 Mobile" draggable="false"
-                            class="md:hidden mt-[150px]">
-                        <img data-open-modal="order-selected-car" src="../assets/banners/Баннер 2 _ Специальные предложения _ блок 5.png"
+                        <img data-open-modal="order-selected-car" src="../assets/banners/adaptive/кайо.png"
+                            alt="Banner 2 Mobile" draggable="false" class="md:hidden mt-[150px]">
+                        <img data-open-modal="order-selected-car"
+                            src="../assets/banners/Баннер 2 _ Специальные предложения _ блок 5.png"
                             alt="Banner 2 Desktop" draggable="false" class="hidden md:block mt-[140px]">
                     </div>
 
                     <!-- Слайд 3 -->
                     <div class="slide cursor-pointer flex-shrink-0 w-full flex justify-center">
-                        <img data-open-modal="order-selected-car" src="../assets/banners/adaptive/ливан.png" alt="Banner 3 Mobile" draggable="false"
-                            class="md:hidden mt-[150px]">
-                        <img data-open-modal="order-selected-car" src="../assets/banners/Баннер 3 _Специальные предложения блок 5.png" alt="Banner 3 Desktop"
+                        <img data-open-modal="order-selected-car" src="../assets/banners/adaptive/ливан.png"
+                            alt="Banner 3 Mobile" draggable="false" class="md:hidden mt-[150px]">
+                        <img data-open-modal="order-selected-car"
+                            src="../assets/banners/Баннер 3 _Специальные предложения блок 5.png" alt="Banner 3 Desktop"
                             draggable="false" class="hidden md:block mt-[140px]">
                     </div>
                 </div>
@@ -471,39 +474,39 @@
 
                 <div class="flex flex-col  space-y-8">
                     <div class="text-center space-y-6 max-w-3xl">
-                        <h3  class="text-[20px] md:text-4xl font-bold leading-tight">Остались вопросы?</h3>
+                        <h3 class="text-[20px] md:text-4xl font-bold leading-tight">Остались вопросы?</h3>
                         <p class="text-[14px] md:text-xl leading-relaxed">
                             Оставьте ваши контакты и мы свяжемся с Вами в ближайшее время, чтобы ответить на все вопросы
                             и помочь Вам!
                         </p>
                     </div>
 
-                    <form  class="space-y-8 mt-2 w-full max-w-3xl">
+                    <form class="space-y-8 mt-2 w-full max-w-3xl">
                         <!-- Поле ФИО -->
                         <div>
                             <input type="text"
                                 class="w-full h-[60px] px-6 bg-[#F8F8F852] border border-[#F8F8F852] rounded-xl
                                text-white placeholder-white placeholder-opacity-70 text-base font-normal
-                               focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-60 focus:border-red-400" placeholder="ФИО" minlength="2"
-                                maxlength="100">
+                               focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-60 focus:border-red-400"
+                                placeholder="ФИО" minlength="2" maxlength="100">
                             <div class="error-message text-red-300 text-sm mt-1 hidden"></div>
                         </div>
 
                         <!-- Поле телефона -->
                         <div>
-                            <input type="tel"  
+                            <input type="tel"
                                 class="w-full h-[60px] px-6 bg-[#F8F8F852] border border-[#F8F8F852] rounded-xl
                                text-white placeholder-white placeholder-opacity-70 text-base font-normal
-                               focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-60 focus:border-red-400" placeholder="Ваш телефон">
+                               focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-60 focus:border-red-400"
+                                placeholder="Ваш телефон">
                             <div class="error-message text-red-300 text-sm mt-1 hidden"></div>
                         </div>
 
                         <!-- Чекбокс -->
                         <div class="flex items-start mt-1">
                             <input type="checkbox" name="privacy_policy" required checked
-                                class="mt-1.5 w-5 h-5 custom-checkbox-input border border-[#F8F8F852] rounded bg-transparent focus:ring-red-400"
-                                >
-                            <label  class="ml-2 text-sm text-gray-300 leading-tight">
+                                class="mt-1.5 w-5 h-5 custom-checkbox-input border border-[#F8F8F852] rounded bg-transparent focus:ring-red-400">
+                            <label class="ml-2 text-sm text-gray-300 leading-tight">
                                 Я согласен с политикой обработки персональных данных
                             </label>
                             <div class="error-message text-red-300 text-sm mt-1 ml-7 hidden"></div>

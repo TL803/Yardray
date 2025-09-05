@@ -16,7 +16,7 @@ export class OrderCarTemplate extends TemplateRenderer {
 
     /* html */
     return `
-      <div class="flex flex-col items-center h-full w-full max-w-[100vw] overflow-hidden">
+      <div class="flex flex-col  h-full w-full max-w-[100vw] overflow-hidden">
         <!-- Основной контейнер формы -->
         <div class="w-full max-w-[95vw] sm:max-w-[685px] bg-transparent rounded-xl overflow-hidden">
           <div class="text-white space-y-4 sm:space-y-6 md:space-y-8 p-3 sm:p-4 md:p-[20px]">
@@ -133,20 +133,20 @@ export class OrderCarTemplate extends TemplateRenderer {
               </div>
 
               <!-- Чекбокс согласия -->
-              <div class="flex items-start mt-1">
+              <div class="flex items-start mt-1 transition-all duration-500">
                 <input 
                   type="checkbox" 
                   name="privacy_policy" 
                   data-content="agree"
                   required 
                   checked
-                  class="mt-1 w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5 border border-[#F8F8F852] rounded bg-transparent focus:ring-red-400 flex-shrink-0"
+                  class="mt-1 w-4 h-4 sm:w-5 sm:h-5 custom-checkbox-input border border-[#F8F8F852] rounded bg-transparent focus:ring-red-400 transition-all duration-500"
                   id="privacy-policy"
                 >
-                <label for="privacy-policy" class="ml-2 text-[11px] sm:text-xs md:text-sm text-gray-300 leading-tight break-words">
+                <label for="privacy-policy" class="ml-2 text-xs sm:text-[14px] text-gray-300 leading-tight transition-all duration-500">
                   Я согласен с политикой обработки персональных данных
                 </label>
-                <div class="error-message text-red-300 text-xs sm:text-sm mt-1 ml-7 hidden"></div>
+                <div class="error-message text-red-300 text-xs sm:text-sm mt-1 ml-5 sm:ml-7 hidden"></div>
               </div>
             </form>
           </div>
