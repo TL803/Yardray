@@ -16,22 +16,24 @@ export class OrderCarTemplate extends TemplateRenderer {
 
     /* html */
     return `
-      <div class="flex flex-col items-between h-full">
-        <div class="w-[685px] bg-transparent rounded-xl overflow-hidden">
-          <div class="text-white space-y-8 p-[20px]">
-            <div class="flex flex-col gap-[20px]">
-              <h3 class="text-[48px] font-bold text-center leading-tight">
+      <div class="flex flex-col items-center h-full w-full max-w-[100vw] overflow-hidden">
+        <!-- Основной контейнер формы -->
+        <div class="w-full max-w-[95vw] sm:max-w-[685px] bg-transparent rounded-xl overflow-hidden">
+          <div class="text-white space-y-4 sm:space-y-6 md:space-y-8 p-3 sm:p-4 md:p-[20px]">
+            <div class="flex flex-col gap-3 sm:gap-4 md:gap-[20px] text-center">
+              <h3 class="text-[24px] sm:text-[32px] md:text-[48px] font-bold leading-tight break-words">
                 ${title}
               </h3>
-              <p class="text-[20px] text-white text-center leading-relaxed">
+              <p class="text-[14px] sm:text-[16px] md:text-[20px] text-white text-center leading-relaxed break-words">
                 ${description}
               </p>
             </div>
 
-            <!-- Контейнер ошибок -->
-            <div id="form-errors" class="errors mt-2 px-4 text-center"></div>
+            <!-- Блок ошибок -->
+            <div id="form-errors" class="errors mt-2 px-2 sm:px-4 text-center text-red-300 text-xs sm:text-sm md:text-base"></div>
 
-            <form id="order-car-form" data-modal-form="order-car" class="space-y-8 mt-2 w-full">
+            <!-- Форма -->
+            <form id="order-car-form" data-modal-form="order-car" class="space-y-4 sm:space-y-6 md:space-y-8 mt-2 w-full">
               <!-- Кастомный селект: Марка машины -->
               <div class="relative">
                 <div class="relative w-full">
@@ -39,7 +41,7 @@ export class OrderCarTemplate extends TemplateRenderer {
                     name="car_brand" 
                     data-content="carBrand"
                     required 
-                    class="custom-select-native opacity-0 absolute inset-0 w-full h-[60px] cursor-pointer z-10"
+                    class="custom-select-native opacity-0 absolute inset-0 w-full h-[45px] sm:h-[50px] md:h-[60px] cursor-pointer z-10"
                     id="car-brand-select"
                   >
                     <option value="" disabled selected>Марка машины</option>
@@ -51,13 +53,13 @@ export class OrderCarTemplate extends TemplateRenderer {
                   </select>
                   
                   <div 
-                    class="w-full h-[60px] px-6 bg-[#F8F8F852] border border-[#F8F8F852] rounded-xl text-white text-[16px] font-normal flex items-center justify-between cursor-pointer appearance-none focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-60 focus:border-red-400"
+                    class="w-full h-[45px] sm:h-[50px] md:h-[60px] px-3 sm:px-4 md:px-6 bg-[#F8F8F852] border border-[#F8F8F852] rounded-lg md:rounded-xl text-white text-[13px] sm:text-[14px] md:text-[16px] font-normal flex items-center justify-between cursor-pointer appearance-none focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-60 focus:border-red-400 overflow-hidden"
                     id="car-brand-display"
                   >
-                    <span id="car-brand-label">Марка машины</span>
-                    <div class="pointer-events-none relative custom-select-arrow"></div>
+                    <span id="car-brand-label" class="truncate">Марка машины</span>
+                    <div class="pointer-events-none relative custom-select-arrow flex-shrink-0 ml-2"></div>
                   </div>
-                  <div class="error-message text-red-300 text-sm mt-1 hidden"></div>
+                  <div class="error-message text-red-300 text-xs sm:text-sm mt-1 hidden"></div>
                 </div>
               </div>
 
@@ -68,7 +70,7 @@ export class OrderCarTemplate extends TemplateRenderer {
                     name="car_model" 
                     data-content="carModel"
                     required 
-                    class="custom-select-native opacity-0 absolute inset-0 w-full h-[60px] cursor-pointer z-10"
+                    class="custom-select-native opacity-0 absolute inset-0 w-full h-[45px] sm:h-[50px] md:h-[60px] cursor-pointer z-10"
                     id="car-model-select"
                   >
                     <option value="" disabled selected>Модель</option>
@@ -80,13 +82,13 @@ export class OrderCarTemplate extends TemplateRenderer {
                   </select>
                   
                   <div 
-                    class="w-full h-[60px] px-6 bg-[#F8F8F852] border border-[#F8F8F852] rounded-xl text-white text-[16px] font-normal flex items-center justify-between cursor-pointer appearance-none focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-60 focus:border-red-400"
+                    class="w-full h-[45px] sm:h-[50px] md:h-[60px] px-3 sm:px-4 md:px-6 bg-[#F8F8F852] border border-[#F8F8F852] rounded-lg md:rounded-xl text-white text-[13px] sm:text-[14px] md:text-[16px] font-normal flex items-center justify-between cursor-pointer appearance-none focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-60 focus:border-red-400 overflow-hidden"
                     id="car-model-display"
                   >
-                    <span id="car-model-label">Модель</span>
-                    <div class="pointer-events-none relative custom-select-arrow"></div>
+                    <span id="car-model-label" class="truncate">Модель</span>
+                    <div class="pointer-events-none relative custom-select-arrow flex-shrink-0 ml-2"></div>
                   </div>
-                  <div class="error-message text-red-300 text-sm mt-1 hidden"></div>
+                  <div class="error-message text-red-300 text-xs sm:text-sm mt-1 hidden"></div>
                 </div>
               </div>
 
@@ -97,18 +99,18 @@ export class OrderCarTemplate extends TemplateRenderer {
                   name="full_name" 
                   data-content="fullName"
                   required 
-                  class="w-full h-[60px] px-6 
-                         bg-[#F8F8F852] border border-[#F8F8F852] rounded-xl
+                  minlength="2"
+                  maxlength="100"
+                  class="w-full h-[45px] sm:h-[50px] md:h-[60px] px-3 sm:px-4 md:px-6 
+                         bg-[#F8F8F852] border border-[#F8F8F852] rounded-lg md:rounded-xl
                          text-white placeholder-white placeholder-opacity-70 
-                         text-[16px] font-normal 
+                         text-[13px] sm:text-[14px] md:text-[16px] font-normal 
                          focus:outline-none 
                          focus:ring-2 focus:ring-red-400 focus:ring-opacity-60 
                          focus:border-red-400"
                   placeholder="ФИО"
-                  minlength="2"
-                  maxlength="100"
                 >
-                <div class="error-message text-red-300 text-sm mt-1 hidden"></div>
+                <div class="error-message text-red-300 text-xs sm:text-sm mt-1 hidden"></div>
               </div>
 
               <!-- Телефон -->
@@ -118,16 +120,16 @@ export class OrderCarTemplate extends TemplateRenderer {
                   name="phone" 
                   data-content="phone"
                   required 
-                  class="w-full h-[60px] px-6 
-                         bg-[#F8F8F852] border border-[#F8F8F852] rounded-xl
+                  class="w-full h-[45px] sm:h-[50px] md:h-[60px] px-3 sm:px-4 md:px-6 
+                         bg-[#F8F8F852] border border-[#F8F8F852] rounded-lg md:rounded-xl
                          text-white placeholder-white placeholder-opacity-70 
-                         text-[16px] font-normal 
+                         text-[13px] sm:text-[14px] md:text-[16px] font-normal 
                          focus:outline-none 
                          focus:ring-2 focus:ring-red-400 focus:ring-opacity-60 
                          focus:border-red-400"
                   placeholder="Ваш телефон"
                 >
-                <div class="error-message text-red-300 text-sm mt-1 hidden"></div>
+                <div class="error-message text-red-300 text-xs sm:text-sm mt-1 hidden"></div>
               </div>
 
               <!-- Чекбокс согласия -->
@@ -138,30 +140,31 @@ export class OrderCarTemplate extends TemplateRenderer {
                   data-content="agree"
                   required 
                   checked
-                  class="mt-1.5 w-5 h-5 custom-checkbox-input border border-[#F8F8F852] rounded bg-transparent focus:ring-red-400"
+                  class="mt-1 w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5 border border-[#F8F8F852] rounded bg-transparent focus:ring-red-400 flex-shrink-0"
                   id="privacy-policy"
                 >
-                <label for="privacy-policy" class="ml-2 text-sm text-gray-300 leading-tight">
+                <label for="privacy-policy" class="ml-2 text-[11px] sm:text-xs md:text-sm text-gray-300 leading-tight break-words">
                   Я согласен с политикой обработки персональных данных
                 </label>
-                <div class="error-message text-red-300 text-sm mt-1 ml-7 hidden"></div>
+                <div class="error-message text-red-300 text-xs sm:text-sm mt-1 ml-7 hidden"></div>
               </div>
             </form>
           </div>
         </div>
 
         <!-- Кнопка отправки -->
-        <div class="w-full px-8 mt-6">
+        <div class="w-full max-w-[95vw] px-2 sm:px-4 md:px-8 mt-3 sm:mt-4">
           <button 
             type="submit"
             form="order-car-form"
-            class="w-full h-[84px] 
+            class="w-full h-[50px] sm:h-[60px] md:h-[84px] 
                    bg-red-600 hover:bg-red-700 
-                   text-white text-[24px] font-semibold 
-                   rounded-2xl
+                   text-white text-[16px] sm:text-[18px] md:text-[24px] font-semibold 
+                   rounded-lg md:rounded-2xl
                    transition duration-200 
                    transform hover:scale-[1.01] 
-                   focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                   focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2
+                   break-words"
           >
             ${buttonText}
           </button>
@@ -177,22 +180,24 @@ export class OrderCarTemplate extends TemplateRenderer {
   static getSuccessTemplate() {
     /* html */
     return `
-      <div class="text-center h-[700px] flex flex-col justify-between mx-auto p-8">
-        <div>
-          <h2 class="text-[48px] font-bold text-white mb-4">Заявка успешно отправлена!</h2>
-          <p class="text-white text-[24px] mb-8 leading-relaxed">
+      <div class="text-center h-auto min-h-[400px] sm:min-h-[500px] md:h-[700px] flex flex-col justify-between mx-auto p-4 sm:p-6 md:p-8 max-w-[95vw]">
+        <div class="space-y-3 sm:space-y-4 md:space-y-6 text-center flex-1 flex flex-col justify-center">
+          <h2 class="text-[28px] sm:text-[36px] md:text-[48px] font-bold text-white break-words">
+            Заявка успешно отправлена!
+          </h2>
+          <p class="text-white text-[16px] sm:text-[18px] md:text-[24px] leading-relaxed break-words">
             Совсем скоро мы позвоним Вам,<br> чтобы найти лучшее предложение.
           </p>
         </div>
         <button 
           data-close-modal
-          class="w-full h-[84px] 
+          class="w-full h-[50px] sm:h-[60px] md:h-[84px] 
                  bg-red-600 hover:bg-red-700 
-                 text-white text-[24px] font-semibold 
-                 rounded-2xl
+                 text-white text-[16px] sm:text-[18px] md:text-[24px] font-semibold 
+                 rounded-lg md:rounded-2xl
                  transition duration-200 
                  transform hover:scale-[1.01] 
-                 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 mt-3 sm:mt-4">
           Отлично!
         </button>
       </div>
@@ -204,7 +209,6 @@ export class OrderCarTemplate extends TemplateRenderer {
     this.initCustomSelects(modalElement);
 
     FormInitializer.initForm(modalElement, this, () => {
-      // Дополнительная валидация кастомных селектов
       const brandSelect = modalElement.querySelector('#car-brand-select');
       const modelSelect = modalElement.querySelector('#car-model-select');
 
@@ -226,12 +230,11 @@ export class OrderCarTemplate extends TemplateRenderer {
 
       return isValid;
     }, () => {
-      // onSuccess — можно использовать для аналитики
       console.log('✅ Заявка на авто отправлена:', params);
     });
   }
 
-  // Инициализация отображения селектов
+  // Инициализация кастомных селектов
   static initCustomSelects(modalElement) {
     const brandSelect = modalElement.querySelector('#car-brand-select');
     const brandLabel = modalElement.querySelector('#car-brand-label');
@@ -250,7 +253,7 @@ export class OrderCarTemplate extends TemplateRenderer {
     modalElement.querySelector('#car-model-display').addEventListener('click', () => modelSelect.focus());
   }
 
-  // Подсветка ошибок для кастомных полей
+  // Подсветка ошибок
   static markAsInvalid(modalElement, contentType) {
     const selector = contentType === 'carBrand'
       ? '#car-brand-display'

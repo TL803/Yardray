@@ -7,23 +7,24 @@ export class OrderForLeasingModal extends TemplateRenderer {
   static getTemplate() {
     /* html */
     return `
-      <div class="flex flex-col items-between h-full">
-        <div class="w-[685px] bg-transparent rounded-xl overflow-hidden">
-          <div class="text-white space-y-8 p-[20px]">
-            <div class="flex flex-col gap-[20px]">
-              <h3 class="text-[48px] font-bold text-center leading-tight">
+      <div class="flex flex-col items-center h-full w-full">
+        <!-- Основной контейнер формы -->
+        <div class="w-full sm:w-[685px] bg-transparent rounded-xl overflow-hidden">
+          <div class="text-white space-y-6 sm:space-y-8 p-4 sm:p-[20px]">
+            <div class="flex flex-col gap-4 sm:gap-[20px] text-center">
+              <h3 class="text-[32px] sm:text-[48px] font-bold leading-tight">
                 Заявка на лизинг
               </h3>
-              <p class="text-[20px] text-white text-center leading-relaxed">
+              <p class="text-[16px] sm:text-[20px] text-white text-center leading-relaxed">
                 Оставьте заявку — мы подберём авто под ваши пожелания и свяжемся в ближайшее время
               </p>
             </div>
 
-            <!-- Контейнер ошибок -->
-            <div id="form-errors" class="errors mt-2 px-4 text-center"></div>
+            <!-- Блок ошибок -->
+            <div id="form-errors" class="errors mt-2 px-4 text-center text-red-300 text-sm sm:text-base"></div>
 
             <!-- Форма -->
-            <form id="leasing-form" data-modal-form="leasing" class="space-y-8 mt-2 w-full">
+            <form id="leasing-form" data-modal-form="leasing" class="space-y-6 sm:space-y-8 mt-2 w-full">
               <!-- Поле ФИО -->
               <div>
                 <input 
@@ -31,16 +32,16 @@ export class OrderForLeasingModal extends TemplateRenderer {
                   name="full_name" 
                   data-content="fullName"
                   required 
-                  class="w-full h-[60px] px-6 
-                         bg-[#F8F8F852] border border-[#F8F8F852] rounded-xl
+                  minlength="2"
+                  maxlength="100"
+                  class="w-full h-[50px] sm:h-[60px] px-4 sm:px-6 
+                         bg-[#F8F8F852] border border-[#F8F8F852] rounded-lg sm:rounded-xl
                          text-white placeholder-white placeholder-opacity-70 
-                         text-[16px] font-normal 
+                         text-[14px] sm:text-[16px] font-normal 
                          focus:outline-none 
                          focus:ring-2 focus:ring-red-400 focus:ring-opacity-60 
                          focus:border-red-400"
                   placeholder="ФИО"
-                  minlength="2"
-                  maxlength="100"
                 >
                 <div class="error-message text-red-300 text-sm mt-1 hidden"></div>
               </div>
@@ -52,10 +53,10 @@ export class OrderForLeasingModal extends TemplateRenderer {
                   name="phone" 
                   data-content="phone"
                   required 
-                  class="w-full h-[60px] px-6 
-                         bg-[#F8F8F852] border border-[#F8F8F852] rounded-xl
+                  class="w-full h-[50px] sm:h-[60px] px-4 sm:px-6 
+                         bg-[#F8F8F852] border border-[#F8F8F852] rounded-lg sm:rounded-xl
                          text-white placeholder-white placeholder-opacity-70 
-                         text-[16px] font-normal 
+                         text-[14px] sm:text-[16px] font-normal 
                          focus:outline-none 
                          focus:ring-2 focus:ring-red-400 focus:ring-opacity-60 
                          focus:border-red-400"
@@ -72,10 +73,10 @@ export class OrderForLeasingModal extends TemplateRenderer {
                   data-content="agree"
                   required 
                   checked
-                  class="mt-1.5 w-5 h-5 custom-checkbox-input border border-[#F8F8F852] rounded bg-transparent focus:ring-red-400"
+                  class="mt-1.5 w-4 h-4 sm:w-5 sm:h-5 border border-[#F8F8F852] rounded bg-transparent focus:ring-red-400"
                   id="privacy-policy"
                 >
-                <label for="privacy-policy" class="ml-2 text-sm text-gray-300 leading-tight">
+                <label for="privacy-policy" class="ml-2 text-xs sm:text-sm text-gray-300 leading-tight">
                   Я согласен с политикой обработки персональных данных
                 </label>
                 <div class="error-message text-red-300 text-sm mt-1 ml-7 hidden"></div>
@@ -85,18 +86,17 @@ export class OrderForLeasingModal extends TemplateRenderer {
         </div>
 
         <!-- Кнопка отправки -->
-        <div class="w-full px-8 mt-6">
+        <div class="w-full px-4 sm:px-8 mt-4">
           <button 
             type="submit"
             form="leasing-form"
-            class="w-full h-[84px] 
+            class="w-full h-[60px] sm:h-[84px] 
                    bg-red-600 hover:bg-red-700 
-                   text-white text-[24px] font-semibold 
-                   rounded-2xl
+                   text-white text-[18px] sm:text-[24px] font-semibold 
+                   rounded-lg sm:rounded-2xl
                    transition duration-200 
                    transform hover:scale-[1.01] 
-                   focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-          >
+                   focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
             Подобрать авто!
           </button>
         </div>
@@ -115,29 +115,31 @@ export class OrderForLeasingModal extends TemplateRenderer {
   static getSuccessTemplate() {
     /* html */
     return `
-      <div class="text-center h-[700px] flex flex-col justify-between mx-auto p-8">
-        <div>
-          <h2 class="text-[48px] font-bold text-white mb-4">Заявка успешно отправлена!</h2>
-          <p class="text-white text-[24px] mb-8 leading-relaxed">
+      <div class="text-center h-auto min-h-[500px] sm:h-[700px] flex flex-col justify-between mx-auto p-6 sm:p-8">
+        <div class="space-y-4 sm:space-y-6 text-center flex-1 flex flex-col justify-center">
+          <h2 class="text-[36px] sm:text-[48px] font-bold text-white">
+            Заявка успешно отправлена!
+          </h2>
+          <p class="text-white text-[18px] sm:text-[24px] leading-relaxed">
             Мы уже подбираем для вас авто,<br> скоро свяжемся с вами!
           </p>
         </div>
         <button 
           data-close-modal
-          class="w-full h-[84px] 
+          class="w-full h-[60px] sm:h-[84px] 
                  bg-red-600 hover:bg-red-700 
-                 text-white text-[24px] font-semibold 
-                 rounded-2xl
+                 text-white text-[18px] sm:text-[24px] font-semibold 
+                 rounded-lg sm:rounded-2xl
                  transition duration-200 
                  transform hover:scale-[1.01] 
-                 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 mt-4 sm:mt-0">
           Отлично!
         </button>
       </div>
     `;
   }
 
-  // Инициализация формы через общий инициализатор
+  // Инициализация формы
   static initForm(modalElement) {
     FormInitializer.initForm(modalElement, this);
   }
