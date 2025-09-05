@@ -71,7 +71,7 @@ export class FormValidator {
                 const closeBtn = modalElement.querySelector('#close-success-modal');
                 if (closeBtn) {
                     closeBtn.addEventListener('click', () => {
-                        this.closeModal(modalElement);
+                        this.closeModal();
                     });
                 }
             } else {
@@ -80,7 +80,7 @@ export class FormValidator {
                 const closeBtn = modalElement.querySelector('#close-success-modal');
                 if (closeBtn) {
                     closeBtn.addEventListener('click', () => {
-                        this.closeModal(modalElement);
+                        this.closeModal();
                     });
                 }
             }
@@ -89,27 +89,17 @@ export class FormValidator {
         }
     }
 
-    static closeModal(modalElement) {
-        // Находим и закрываем модальное окно
-        const modalContainer = modalElement.closest('.modal-container') || 
-                              modalElement.closest('.modal-overlay') ||
-                              modalElement.closest('.modal-backdrop') ||
-                              modalElement.closest('[role="dialog"]');
-        
-        if (modalContainer) {
-            modalContainer.remove();
+    static closeModal() {
+        // Закрываем все модальные окна через глобальную функцию
+        if (typeof window.closeAllModals === 'function') {
+            window.closeAllModals();
+        } else {
+            // Fallback: удаляем все возможные модальные элементы
+            document.querySelectorAll('.modal-container, .modal, .custom-modal-window, .modal-overlay, .overlay, [role="dialog"]').forEach(element => {
+                element.remove();
+            });
+            document.body.style.overflow = '';
         }
-        
-        // Также удаляем overlay если есть
-        const overlays = document.querySelectorAll('.modal-overlay, .overlay, .modal-backdrop');
-        overlays.forEach(overlay => {
-            overlay.remove();
-        });
-
-        // Включаем скролл на body
-        document.body.classList.remove('modal-open');
-        document.body.style.overflow = '';
-        document.body.style.position = '';
     }
 
     static markAsInvalid(modalElement, contentType) {
@@ -162,7 +152,6 @@ export class FormValidator {
     }
 }
 
-// Добавляем недостающий класс FormInitializer
 export class FormInitializer {
     static initForm(modalElement, templateInstance) {
 

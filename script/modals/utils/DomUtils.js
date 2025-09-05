@@ -1,36 +1,56 @@
-// /script/modals/utils/DomUtils.js
 export class DomUtils {
-  static createElement(tag, className = '', attrs = {}) {
-    const el = document.createElement(tag);
-    if (className) el.className = className;
-    Object.keys(attrs).forEach(key => el.setAttribute(key, attrs[key]));
-    return el;
-  }
+    static createElement(tag, classes = '', attributes = {}) {
+        const element = document.createElement(tag);
+        if (classes) element.className = classes;
+        Object.keys(attributes).forEach(key => {
+            element.setAttribute(key, attributes[key]);
+        });
+        return element;
+    }
 
-  static appendChildren(parent, children) {
-    children.filter(Boolean).forEach(child => parent.appendChild(child));
-  }
+    static appendChildren(parent, children) {
+        children.forEach(child => parent.appendChild(child));
+    }
 
-  static onEscape(callback) {
-    const handler = (e) => e.key === 'Escape' && callback();
-    document.addEventListener('keydown', handler);
-    return () => document.removeEventListener('keydown', handler);
-  }
+    static disableScroll() {
+        // Просто скрываем overflow
+        document.body.style.overflow = 'hidden';
+    }
 
-  static closeOnBackdrop(e, backdrop, onClose) {
-    if (e.target === backdrop) onClose();
-  }
+    static enableScroll() {
+        // Восстанавливаем overflow
+        document.body.style.overflow = '';
+    }
 
-  static disableScroll() {
-    document.body.classList.add('overflow-hidden');
-  }
+    static closeOnBackdrop(event, backdropElement, callback) {
+        if (event.target === backdropElement) {
+            callback();
+        }
+    }
 
-  static enableScroll() {
-    document.body.classList.remove('overflow-hidden');
-  }
+    static onEscape(callback) {
+        const handleEscape = (event) => {
+            if (event.key === 'Escape') {
+                callback();
+            }
+        };
 
-  static focusFirstInput(container) {
-    const firstInput = container.querySelector('input, button, select, textarea');
-    firstInput?.focus();
-  }
+        document.addEventListener('keydown', handleEscape);
+        
+        // Возвращаем функцию для удаления обработчика
+        return () => {
+            document.removeEventListener('keydown', handleEscape);
+        };
+    }
+
+    static focusFirstInput(element) {
+        const focusableElements = element.querySelectorAll(
+            'input, select, textarea, button, [href], [tabindex]:not([tabindex="-1"])'
+        );
+        
+        if (focusableElements.length > 0) {
+            // Фокусируемся без прокрутки
+            focusableElements[0].focus({ preventScroll: true });
+        }
+    }
 }

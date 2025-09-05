@@ -112,7 +112,5 @@ window.closeAllModals = function() {
     });
     
     // Восстанавливаем скролл
-    document.body.classList.remove('modal-open');
-    document.body.style.overflow = '';
-    document.body.style.position = '';
+    DomUtils.enableScroll();
 };
