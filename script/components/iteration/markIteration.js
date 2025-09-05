@@ -22,9 +22,9 @@
 
     marks.forEach(mark => {
         const markElement = document.createElement('div');
-        markElement.className = 'w-[166px] h-[49px] md:w-[211px]  md:h-[119px] bg-white flex items-center justify-center rounded-[24px]';
+        markElement.className = 'w-[166px] h-[49px] md:w-[211px]  md:h-[119px] bg-white flex items-center justify-center rounded-[24px] cursor-pointer';
         markElement.innerHTML = `
-            <img data-open-modal="order-selected-car" src="../assets/marks/${mark}" alt="Логотип бренда" class="max-h-full max-w-full object-contain p-2">
+            <img data-open-modal="order-selected-car" src="../assets/marks/${mark}" alt="Логотип бренда" class="max-h-full max-w-full  object-contain p-2">
         `;
 
         marksContainer.append(markElement);
