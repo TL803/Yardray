@@ -101,3 +101,18 @@ export class ModalWindow {
         this.onClose = callback;
     }
 }
+
+// Глобальная функция для закрытия всех модальных окон
+window.closeAllModals = function() {
+    console.log('Closing all modals');
+    
+    // Удаляем все модальные контейнеры
+    document.querySelectorAll('.modal-container, .modal, .custom-modal-window, .modal-overlay, .overlay, [role="dialog"]').forEach(element => {
+        element.remove();
+    });
+    
+    // Восстанавливаем скролл
+    document.body.classList.remove('modal-open');
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+};

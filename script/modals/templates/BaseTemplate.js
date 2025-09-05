@@ -66,20 +66,50 @@ export class FormValidator {
             const templateInstance = modalElement.__templateInstance;
             if (templateInstance && typeof templateInstance.getSuccessTemplate === 'function') {
                 modalElement.innerHTML = templateInstance.getSuccessTemplate();
+                
+                // Добавляем обработчик для кнопки закрытия в success template
+                const closeBtn = modalElement.querySelector('#close-success-modal');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', () => {
+                        this.closeModal(modalElement);
+                    });
+                }
             } else {
-                modalElement.innerHTML = '<div class="p-6 bg-white rounded-lg text-center"><h3 class="text-2xl font-bold text-green-600">✅ Успешно!</h3></div>';
-            }
-            
-            const closeBtn = modalElement.querySelector('#close-success-modal');
-            if (closeBtn) {
-                closeBtn.addEventListener('click', () => {
-                    const modal = modalElement.closest('.modal, [data-modal]');
-                    if (modal) modal.remove();
-                });
+                modalElement.innerHTML = '<div class="p-6 bg-white rounded-lg text-center"><h3 class="text-2xl font-bold text-green-600">✅ Успешно!</h3><button id="close-success-modal" class="mt-4 px-4 py-2 bg-red-600 text-white rounded">Закрыть</button></div>';
+                
+                const closeBtn = modalElement.querySelector('#close-success-modal');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', () => {
+                        this.closeModal(modalElement);
+                    });
+                }
             }
         } else {
             ErrorDisplay.showError(errorsContainer, errorMessage);
         }
+    }
+
+    static closeModal(modalElement) {
+        // Находим и закрываем модальное окно
+        const modalContainer = modalElement.closest('.modal-container') || 
+                              modalElement.closest('.modal-overlay') ||
+                              modalElement.closest('.modal-backdrop') ||
+                              modalElement.closest('[role="dialog"]');
+        
+        if (modalContainer) {
+            modalContainer.remove();
+        }
+        
+        // Также удаляем overlay если есть
+        const overlays = document.querySelectorAll('.modal-overlay, .overlay, .modal-backdrop');
+        overlays.forEach(overlay => {
+            overlay.remove();
+        });
+
+        // Включаем скролл на body
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
+        document.body.style.position = '';
     }
 
     static markAsInvalid(modalElement, contentType) {
@@ -132,6 +162,7 @@ export class FormValidator {
     }
 }
 
+// Добавляем недостающий класс FormInitializer
 export class FormInitializer {
     static initForm(modalElement, templateInstance) {
 

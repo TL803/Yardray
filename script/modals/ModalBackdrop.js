@@ -15,6 +15,8 @@ export class ModalBackdrop {
 
   show() {
     document.body.appendChild(this.element);
+    // Сохраняем позицию скролла перед блокировкой
+    this._scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
     DomUtils.disableScroll();
   }
 
@@ -23,6 +25,10 @@ export class ModalBackdrop {
       this.element.parentNode.removeChild(this.element);
     }
     DomUtils.enableScroll();
+    
+    // Восстанавливаем позицию скролла
+    if (this._scrollPosition !== undefined) {
+      window.scrollTo(0, this._scrollPosition);
+    }
   }
 }
-

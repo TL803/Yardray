@@ -56,7 +56,8 @@ export class ModalManager {
 
         backdrop.show();
 
-        DomUtils.focusFirstInput(window.element);
+        // Убрана строка с автофокусом, которая вызывала прокрутку
+        // DomUtils.focusFirstInput(window.element);
     }
 
     close() {
